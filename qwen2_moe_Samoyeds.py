@@ -36,9 +36,9 @@ parser.add_argument('--layer', action='store_true', default=False)
 parser.add_argument('--model', action='store_true', default=False)
 
 parser.add_argument('--hidden_size', type=int, default=2048)
-parser.add_argument('--intermediate_size', type=int, default=1408)
+parser.add_argument('--intermediate_size', type=int, default=5632)
 
-parser.add_argument('--experts', type=int, default=8)
+parser.add_argument('--experts', type=int, default=60)
 
 parser.add_argument('--flash', action='store_true', default=False)
 

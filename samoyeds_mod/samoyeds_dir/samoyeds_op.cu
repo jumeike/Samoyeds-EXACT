@@ -43,7 +43,7 @@ torch::Tensor ssmm_cuda(torch::Tensor A_values,
 
     auto options = torch::TensorOptions().dtype(torch::kHalf).device(A_values.device()).requires_grad(false);
     torch::Tensor C = torch::zeros({m, B_indices.size(0)}, options);
-
+//     printf("[ssmm_cuda] N=%d, M=%d, m=%d, k=%d, n=%d, B_indices_len=%d\n", N, M, m, k, n, B_indices.size(0));
     HorizontalSsmmKernelExec<BlockShape, WarpShape, MmaShape, 2>(
             m, n, k, vector_length, N, M,
             (half*)A_values.data_ptr(),
@@ -75,7 +75,8 @@ torch::Tensor ssmm_trans_cuda(  torch::Tensor A_values,
 
     auto options = torch::TensorOptions().dtype(torch::kHalf).device(A_values.device()).requires_grad(false);
     torch::Tensor C = torch::zeros({B_indices.size(0), m}, options);
-
+//     printf("[ssmm_trans_cuda] N=%d, M=%d, m=%d, k=%d, n=%d, B_indices_len=%d\n", 
+//        N, M, m, k, n, B_indices.size(0));
     HorizontalSsmmTransKernelExec<BlockShape, WarpShape, MmaShape, 2>(
             m, n, k, vector_length, N, M,
             (half*)A_values.data_ptr(),
@@ -107,7 +108,8 @@ torch::Tensor ssmm_fused_silu_trans_cuda(torch::Tensor A_values,
 
     auto options = torch::TensorOptions().dtype(torch::kHalf).device(A_values.device()).requires_grad(false);
     torch::Tensor C = torch::zeros({B_indices.size(0), m}, options);
-
+//     printf("[ssmm_fused_silu_trans_cuda] N=%d, M=%d, m=%d, k=%d, n=%d, B_indices_len=%d\n", 
+//        N, M, m, k, n, B_indices.size(0));
     HorizontalSsmmFusedActTransKernelExec<BlockShape, WarpShape, MmaShape, 2>(
             m, n, k, vector_length, N, M,
             (half*)A_values.data_ptr(),
@@ -138,7 +140,7 @@ torch::Tensor spmm_dense_cuda(  torch::Tensor A_values,
 
     auto options = torch::TensorOptions().dtype(torch::kHalf).device(A_values.device()).requires_grad(false);
     torch::Tensor D = torch::zeros({m, n}, options);
-
+//     printf("[spmm_dense_cuda] N=%d, M=%d, m=%d, k=%d, n=%d\n", N, M, m, k, n);
     HorizontalSpmmKernelExec<BlockShape, WarpShape, MmaShape, 2>(
             m, n, k, vector_length, N, M,
             (half*)A_values.data_ptr(),
@@ -167,7 +169,7 @@ torch::Tensor spmm_dense_trans_cuda(    torch::Tensor A_values,
 
     auto options = torch::TensorOptions().dtype(torch::kHalf).device(A_values.device()).requires_grad(false);
     torch::Tensor D = torch::zeros({n, m}, options);
-
+//     printf("[spmm_dense_trans_cuda] N=%d, M=%d, m=%d, k=%d, n=%d\n", N, M, m, k, n);
     HorizontalSpmmTransKernelExec<BlockShape, WarpShape, MmaShape, 2>(
             m, n, k, vector_length, N, M,
             (half*)A_values.data_ptr(),
@@ -194,7 +196,7 @@ torch::Tensor spmm_weighted_dense_trans_cuda(   torch::Tensor A_values,
     using BlockShape = ShapeBase<128, 32, 64>;
     using WarpShape = ShapeBase<32, 32, 64>;
     using MmaShape = ShapeBase<16, 32, 8>;
-
+//     printf("[spmm_weighted_dense_trans_cuda] N=%d, M=%d, m=%d, k=%d, n=%d\n", N, M, m, k, n);
     auto options = torch::TensorOptions().dtype(torch::kHalf).device(A_values.device()).requires_grad(false);
     torch::Tensor D = torch::zeros({n, m}, options);
 
@@ -230,7 +232,7 @@ torch::Tensor spmm_weighted_sparse_trans_cuda(  torch::Tensor A_values,
 
     auto options = torch::TensorOptions().dtype(torch::kHalf).device(A_values.device()).requires_grad(false);
     torch::Tensor D = torch::zeros({batch_size, m}, options);
-
+//     printf("[spmm_weighted_sparse_trans_cuda] N=%d, M=%d, m=%d, k=%d, n=%d, B_indices_len=%d\n", N, M, m, k, n, B_indices.size(0));
     HorizontalSpmmSparseWeightedTransKernelExec<BlockShape, WarpShape, MmaShape, 2>(
             m, n, k, vector_length, N, M,
             (half*)A_values.data_ptr(),

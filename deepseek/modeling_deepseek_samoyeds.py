@@ -75,40 +75,70 @@ if is_torch_fx_available():
 logger = logging.get_logger(__name__)
 
 class SSDeepseekMLP(nn.Module):
-    def __init__(self, config, hidden_size = None, intermediate_size = None):
+    def __init__(self, config, hidden_size = None, intermediate_size = None, skip_sparsifier=False):
         super().__init__()
         self.config = config
         self.hidden_size = config.hidden_size if hidden_size is None else hidden_size
         self.intermediate_size = config.intermediate_size if intermediate_size is None else intermediate_size
 
-        self.gate_proj = SSFusedSiluTransLinear(nn.Linear(self.hidden_size, self.intermediate_size, bias=False))
-        self.up_proj = SSTransLinear(nn.Linear(self.hidden_size, self.intermediate_size, bias=False))
-        self.down_proj = SPDenseWeightedLinear(nn.Linear(self.intermediate_size, self.hidden_size, bias=False))
+        if skip_sparsifier:
+            # Create layers WITHOUT calling sparsifier (EXACT will set weights later)
+            self.gate_proj = SSFusedSiluTransLinear(None, self.hidden_size, self.intermediate_size, skip_sparsifier=True)
+            self.up_proj = SSTransLinear(None, self.hidden_size, self.intermediate_size, skip_sparsifier=True)
+            self.down_proj = SPDenseWeightedLinear(None, self.intermediate_size, self.hidden_size, skip_sparsifier=True)
+            # print("Initialized SSDeepseekMLP with skip_sparsifier=True")
+        else:
+            self.gate_proj = SSFusedSiluTransLinear(nn.Linear(self.hidden_size, self.intermediate_size, bias=False))
+            self.up_proj = SSTransLinear(nn.Linear(self.hidden_size, self.intermediate_size, bias=False))
+            self.down_proj = SPDenseWeightedLinear(nn.Linear(self.intermediate_size, self.hidden_size, bias=False))
         self.act_fn = ACT2FN[config.hidden_act]
 
     def forward(self, hidden_states, input_idx, routing_weights):
         batch_size = input_idx.shape[0]
         current_hidden_states = self.gate_proj(hidden_states, input_idx) * self.up_proj(hidden_states, input_idx)
+        # print(f"[MLP] Before down_proj: {current_hidden_states.shape}")
         current_hidden_states = self.down_proj(current_hidden_states, routing_weights.T)
+        # print(f"[MLP] After down_proj: {current_hidden_states.shape}, expected: [{batch_size}, 2048]")
         return current_hidden_states[0:batch_size, ]
+        # return current_hidden_states[:batch_size] #JU
     
 class SharedSSDeepseekMLP(nn.Module):
-    def __init__(self, config, hidden_size = None, intermediate_size = None):
+    def __init__(self, config, hidden_size = None, intermediate_size = None, skip_sparsifier=False):
         super().__init__()
         self.config = config
         self.hidden_size = config.hidden_size if hidden_size is None else hidden_size
         self.intermediate_size = config.intermediate_size if intermediate_size is None else intermediate_size
 
-        self.gate_proj = SPDenseTransLinear(nn.Linear(self.hidden_size, self.intermediate_size, bias=False))
-        self.up_proj = SPDenseTransLinear(nn.Linear(self.hidden_size, self.intermediate_size, bias=False))
-        self.down_proj = SPDenseTransLinear(nn.Linear(self.intermediate_size, self.hidden_size, bias=False))
+        if skip_sparsifier:
+            # print("using dense Linear for shared experts in SharedSSDeepseekMLP with skip_sparsifier=True")
+            # print("intermediate_size:", self.intermediate_size)
+            # Create layers WITHOUT calling sparsifier (EXACT will set weights later)
+            self.gate_proj = nn.Linear(self.hidden_size, self.intermediate_size, bias=False)
+            self.up_proj = nn.Linear(self.hidden_size, self.intermediate_size, bias=False)
+            self.down_proj = nn.Linear(self.intermediate_size, self.hidden_size, bias=False)
+        else:
+            # print("using SPDenseTransLinear for shared experts in SharedSSDeepseekMLP with skip_sparsifier=False")
+            # print("intermediate_size:", self.intermediate_size)
+            self.gate_proj = SPDenseTransLinear(nn.Linear(self.hidden_size, self.intermediate_size, bias=False))
+            self.up_proj = SPDenseTransLinear(nn.Linear(self.hidden_size, self.intermediate_size, bias=False))
+            self.down_proj = SPDenseTransLinear(nn.Linear(self.intermediate_size, self.hidden_size, bias=False))
         self.act_fn = ACT2FN[config.hidden_act]
+        
+        # Use DENSE layers for shared experts (they're always active) #JU
+        # self.gate_proj = nn.Linear(self.hidden_size, self.intermediate_size, bias=False)
+        # self.up_proj = nn.Linear(self.hidden_size, self.intermediate_size, bias=False)
+        # self.down_proj = nn.Linear(self.intermediate_size, self.hidden_size, bias=False)
+        # self.act_fn = ACT2FN[config.hidden_act]
 
     def forward(self, hidden_states):
         orig_shape = hidden_states.shape
         hidden_states = hidden_states.view(-1, hidden_states.shape[-1])
+        # batch, seq_len, _ = hidden_states.shape
+        # hidden_states = hidden_states.view(-1, self.hidden_size)  # Use self.hidden_size instead of shape[-1]
         temp = self.down_proj(self.act_fn(self.gate_proj(hidden_states)) * self.up_proj(hidden_states))
         return temp.reshape(*orig_shape)
+        # print(f"DEBUG: temp.shape={temp.shape}, expected=[{batch*seq_len}, {self.hidden_size}]")
+        # return temp.view(batch, seq_len, self.hidden_size)
         # current_hidden_states = self.act_fn(self.gate_proj(hidden_states, input_idx)) * self.up_proj(hidden_states, input_idx)
         # current_hidden_states = self.down_proj(current_hidden_states.T, input_idx, hidden_states.shape[0], routing_weights.T)
         # return current_hidden_states
@@ -117,15 +147,16 @@ class SSDeepseekMoE(nn.Module):
     """
     A mixed expert module containing shared experts.
     """
-    def __init__(self, config):
+    def __init__(self, config, skip_sparsifier=False):
         super().__init__()
         self.config = config
         self.num_experts_per_tok = config.num_experts_per_tok
-        self.experts = nn.ModuleList([SSDeepseekMLP(config, intermediate_size = config.moe_intermediate_size) for i in range(config.n_routed_experts)])
+        self.experts = nn.ModuleList([SSDeepseekMLP(config, intermediate_size = config.moe_intermediate_size, skip_sparsifier=skip_sparsifier) for i in range(config.n_routed_experts)])
         self.gate = MoEGate(config)
         if config.n_shared_experts is not None:
+            # print("Using shared experts in SSDeepseekMoE")
             intermediate_size = config.moe_intermediate_size * config.n_shared_experts
-            self.shared_experts = SharedSSDeepseekMLP(config=config, intermediate_size = intermediate_size)
+            self.shared_experts = SharedSSDeepseekMLP(config=config, intermediate_size = intermediate_size, skip_sparsifier=skip_sparsifier)
     
     def forward(self, hidden_states):
         identity = hidden_states

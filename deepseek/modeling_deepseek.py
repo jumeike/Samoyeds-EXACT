@@ -478,7 +478,8 @@ class DeepseekAttention(nn.Module):
                     scaling_factor=scaling_factor,
                     base=self.rope_theta,
                 )
-            elif scaling_type == "dynamic":
+            elif scaling_type == "dynamic" or scaling_type == "yarn":
+                # For yarn, fall back to dynamic NTK scaling
                 self.rotary_emb = DeepseekDynamicNTKScalingRotaryEmbedding(
                     self.head_dim,
                     max_position_embeddings=self.max_position_embeddings,

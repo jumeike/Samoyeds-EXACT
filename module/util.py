@@ -16,11 +16,18 @@
 
 import torch
 import torch.nn.functional as F
+import os
 
 import samoyeds_kernel
 
-M = 2
-N = 1
+# Default Samoyeds baseline is 1:2 (equivalent density to 2:4).
+# Set SAMOYEDS_FORCE_24=1 for strict 2:4 packing (N=2, M=4) in fair A/B runs.
+if os.getenv("SAMOYEDS_FORCE_24", "0") == "1":
+    M = 4
+    N = 2
+else:
+    M = 2
+    N = 1
 vector_length = 128
 SPTC_M = 4
 SPTC_N = 2

@@ -203,7 +203,7 @@ class SPMixtralSparseMoeBlock(nn.Module):
 
 def sparsemoeblock_to_sp(mod):
     if isinstance(mod, MixtralSparseMoeBlock):
-        print("in module replace")
+        # print("in module replace")
         return SPMixtralSparseMoeBlock(mod)
 
     for name, m in mod.named_children():

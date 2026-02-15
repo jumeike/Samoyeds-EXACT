@@ -25,21 +25,29 @@ from module.linear.SPDenseWeightedTransLinear import SPDenseWeightedLinear
 from module.linear.SSTransLinear import SSTransLinear
 
 class SSMixtralBLockSparseTop2MLP(nn.Module):
-    def __init__(self, original: MixtralBLockSparseTop2MLP):
+    def __init__(self, original: MixtralBLockSparseTop2MLP, skip_sparsifier=False):
         super().__init__()
         self.ffn_dim = original.ffn_dim
         self.hidden_dim = original.hidden_dim
 
-        # w1 w3是SS的矩阵乘，input带有expert选择，hidden_states是完整的中间结果，返回结果为压缩的稠密矩阵
-        # w2是SD的矩阵乘
-        # w1 w2 w3 的权重都会根据要求进行稀疏化裁剪
-        self.w1 = SSFusedSiluTransLinear(nn.Linear(self.hidden_dim, self.ffn_dim, bias=False))
-        self.w2 = SPDenseWeightedLinear(nn.Linear(self.ffn_dim, self.hidden_dim, bias=False))
-        self.w3 = SSTransLinear(nn.Linear(self.hidden_dim, self.ffn_dim, bias=False))
+        if skip_sparsifier:
+            # Create dummy tensors - EXACT will replace them
+            self.w1 = SSFusedSiluTransLinear(None, in_features=self.hidden_dim, out_features=self.ffn_dim, skip_sparsifier=True)
+            self.w2 = SPDenseWeightedLinear(None, in_features=self.ffn_dim, out_features=self.hidden_dim, skip_sparsifier=True)
+            self.w3 = SSTransLinear(None, in_features=self.hidden_dim, out_features=self.ffn_dim, skip_sparsifier=True)
+        else:
+            # w1 w3是SS的矩阵乘，input带有expert选择，hidden_states是完整的中间结果，返回结果为压缩的稠密矩阵
+            # w2是SD的矩阵乘
+            # w1 w2 w3 的权重都会根据要求进行稀疏化裁剪
+            self.w1 = SSFusedSiluTransLinear(nn.Linear(self.hidden_dim, self.ffn_dim, bias=False))
+            self.w2 = SPDenseWeightedLinear(nn.Linear(self.ffn_dim, self.hidden_dim, bias=False))
+            self.w3 = SSTransLinear(nn.Linear(self.hidden_dim, self.ffn_dim, bias=False))
 
         self.act_fn = original.act_fn
 
     def forward(self, hidden_states, input_idx, routing_weights):
+        # print(f"[DEBUG] hidden_states.shape={hidden_states.shape}, input_idx.shape={input_idx.shape}, input_idx.dtype={input_idx.dtype}")
+        # print(f"[DEBUG] input_idx min={input_idx.min()}, max={input_idx.max()}")        
         batch_size = input_idx.shape[0]
         current_hidden_states = self.w1(hidden_states, input_idx) * self.w3(hidden_states, input_idx)
         current_hidden_states = self.w2(current_hidden_states, routing_weights.T)
@@ -58,7 +66,7 @@ class SSMixtralSparseMoeBlock(nn.Module):
     and memory on padding.
     """
 
-    def __init__(self, original: MixtralSparseMoeBlock):
+    def __init__(self, original: MixtralSparseMoeBlock, skip_sparsifier=False):
         super().__init__()
         self.hidden_dim = original.hidden_dim
         self.ffn_dim = original.ffn_dim
@@ -68,7 +76,7 @@ class SSMixtralSparseMoeBlock(nn.Module):
         # gating
         self.gate = original.gate
 
-        self.experts = nn.ModuleList([SSMixtralBLockSparseTop2MLP(expert) for expert in original.experts])
+        self.experts = nn.ModuleList([SSMixtralBLockSparseTop2MLP(expert, skip_sparsifier=skip_sparsifier) for expert in original.experts])
 
     def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
         batch_size, sequence_length, hidden_dim = hidden_states.shape
@@ -92,18 +100,22 @@ class SSMixtralSparseMoeBlock(nn.Module):
 
         # Loop over all available experts in the model and perform the computation on each expert
         for expert_idx in range(self.num_experts):
-            # for expert_idx in range(1):
-            # print("In expert: ", expert_idx, " / ", self.num_experts)
             expert_layer = self.experts[expert_idx]
             idx, top_x = torch.where(expert_mask[expert_idx])
 
             if top_x.shape[0] == 0:
                 continue
 
+            # Force synchronization
+            torch.cuda.synchronize()
+
+            top_x = top_x.clone()
+            idx = idx.clone()
+
             # in torch it is faster to index using lists than torch tensors
             top_x_list = top_x.tolist()
             idx_list = idx.tolist()
-
+            torch.cuda.synchronize()
             # Index the correct hidden states and compute the expert hidden state for
             # the current expert. We need to make sure to multiply the output hidden
             # states by `routing_weights` on the corresponding tokens (top-1 and top-2)
@@ -113,7 +125,13 @@ class SSMixtralSparseMoeBlock(nn.Module):
             # 实际计算时hidden_states的选择在算子中进行
             current_hidden_states = expert_layer(hidden_states, top_x, routing_weights[top_x_list, idx_list, None])
             # expert_layer(hidden_states, top_x, routing_weights[top_x_list, idx_list, None])
-
+            torch.cuda.synchronize()
+            # Adaptive padding: cold experts (1:4) output smaller dims, pad to match hot (2:4)
+            if current_hidden_states.shape[-1] != hidden_dim:
+                # Cold expert output needs padding
+                pad_size = hidden_dim - current_hidden_states.shape[-1]
+                current_hidden_states = torch.nn.functional.pad(current_hidden_states, (0, pad_size), value=0.0)
+            
             # However `index_add_` only support torch tensors for indexing so we'll use
             # the `top_x` tensor here.
             final_hidden_states.index_add_(0, top_x, current_hidden_states.to(hidden_states.dtype))
@@ -121,18 +139,18 @@ class SSMixtralSparseMoeBlock(nn.Module):
         final_hidden_states = final_hidden_states.reshape(batch_size, sequence_length, hidden_dim)
         return final_hidden_states, router_logits
 
-def sparsemoeblock_to_ss(mod):
-    if isinstance(mod, MixtralSparseMoeBlock):
-        print("in module replace")
-        return SSMixtralSparseMoeBlock(mod)
-
+def sparsemoeblock_to_ss(mod, skip_sparsifier=False):
+    # Check by class name to handle different import paths (transformers vs local)
+    if type(mod).__name__ == 'MixtralSparseMoeBlock':
+        # print("in module replace")
+        return SSMixtralSparseMoeBlock(mod, skip_sparsifier=skip_sparsifier)
     for name, m in mod.named_children():
         if isinstance(m, SSMixtralSparseMoeBlock):
             continue
         # if isinstance(m, torch.nn.Linear):
-        if isinstance(m, MixtralSparseMoeBlock):
-            setattr(mod, name, SSMixtralSparseMoeBlock(m))
+        if type(m).__name__ == 'MixtralSparseMoeBlock':
+            setattr(mod, name, SSMixtralSparseMoeBlock(m, skip_sparsifier=skip_sparsifier))
         elif m is not mod:
-            sparsemoeblock_to_ss(m)
+            sparsemoeblock_to_ss(m, skip_sparsifier=skip_sparsifier)
 
     return mod

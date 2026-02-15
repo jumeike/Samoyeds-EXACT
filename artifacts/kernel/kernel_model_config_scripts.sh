@@ -2,7 +2,7 @@
 
 gpu_id=${CUDA_VISIBLE_DEVICES:-0}
 gpu_model=$(nvidia-smi -i $gpu_id --query-gpu=gpu_name --format=csv,noheader,nounits)
-gpu_model=${gpu_model// /.}
+gpu_model=${gpu_model//$'\n'/}
 cuda_version=$(nvcc --version | grep "release" | awk '{print $6}' | cut -c2-)
 
 config="14336,4096,4096, \
@@ -16,19 +16,19 @@ output_dir="artifacts/results/kernel_model_config"
 mkdir -p $output_dir
 
 ssmm_output_file="$output_dir/SSMM_${gpu_model}_CUDA${cuda_version}.txt"
-: >| $ssmm_output_file
+: >| "$ssmm_output_file"
 
 sputnik_output_file="$output_dir/Sputnik_and_cuBlas_${gpu_model}_CUDA${cuda_version}.txt"
-: >| $sputnik_output_file
-echo "algo,arch,m,k,n,meta_block_sz,block_sz,nn_row,mm_col,density,bm,bn,bk,wm,wn,wk,mm,mn,mk,nstage,spmm_time,gemm_time,speedup,error" > $sputnik_output_file
+: >| "$sputnik_output_file"
+echo "algo,arch,m,k,n,meta_block_sz,block_sz,nn_row,mm_col,density,bm,bn,bk,wm,wn,wk,mm,mn,mk,nstage,spmm_time,gemm_time,speedup,error" > "$sputnik_output_file"
 
 venom_output_file="$output_dir/Venom_and_cuBlas_${gpu_model}_CUDA${cuda_version}.txt"
-: >| $venom_output_file
-echo "algo,arch,m,k,n,meta_block_sz,block_sz,nn_row,mm_col,density,bm,bn,bk,wm,wn,wk,mm,mn,mk,nstage,spmm_time,gemm_time,speedup,error" > $venom_output_file
+: >| "$venom_output_file"
+echo "algo,arch,m,k,n,meta_block_sz,block_sz,nn_row,mm_col,density,bm,bn,bk,wm,wn,wk,mm,mn,mk,nstage,spmm_time,gemm_time,speedup,error" > "$venom_output_file"
 
 cusparselt_output_file="$output_dir/cuSparseLtsearched_and_cuBlas_${gpu_model}_CUDA${cuda_version}.txt"
-: >| $cusparselt_output_file
-echo "algo,arch,m,k,n,meta_block_sz,block_sz,nn_row,mm_col,density,bm,bn,bk,wm,wn,wk,mm,mn,mk,nstage,spmm_time,gemm_time,speedup,error" > $cusparselt_output_file
+: >| "$cusparselt_output_file"
+echo "algo,arch,m,k,n,meta_block_sz,block_sz,nn_row,mm_col,density,bm,bn,bk,wm,wn,wk,mm,mn,mk,nstage,spmm_time,gemm_time,speedup,error" > "$cusparselt_output_file"
 
 for cfg in $config; do
   IFS=","; set -- $cfg

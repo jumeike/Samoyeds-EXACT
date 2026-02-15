@@ -33,7 +33,7 @@ torch::Tensor ssmm(torch::Tensor A_values,
                    int M) {
 //    print_indices((uint *)A_indices.data_ptr(), m, k, vector_length, N, M);
 //    print_metadata((uint *)A_metadata.data_ptr(), m, k, vector_length, N, M);
-
+    // printf("[ssmm] N=%d, M=%d\n", N, M);
     return ssmm_cuda(A_values, A_indices, A_metadata, B_values, B_indices, m, k, n, vector_length, N, M);
 }
 
@@ -48,6 +48,7 @@ torch::Tensor ssmm_trans(torch::Tensor A_values,
                         int vector_length,
                         int N,
                         int M) {
+    // printf("[ssmm_trans] N=%d, M=%d\n", N, M);
     return ssmm_trans_cuda(A_values, A_indices, A_metadata, B_values, B_indices, m, k, n, vector_length, N, M);
 }
 
@@ -62,6 +63,7 @@ torch::Tensor ssmm_fused_silu_trans(torch::Tensor A_values,
                                     int vector_length,
                                     int N,
                                     int M) {
+    // printf("[ssmm_fused_silu_trans] N=%d, M=%d\n", N, M);                                    
     return ssmm_fused_silu_trans_cuda(A_values, A_indices, A_metadata, B_values, B_indices, m, k, n, vector_length, N, M);
 }
 
@@ -75,6 +77,7 @@ torch::Tensor spmm_dense(torch::Tensor A_values,
                    int vector_length,
                    int N,
                    int M){
+    // printf("[spmm_dense] N=%d, M=%d\n", N, M);
     return spmm_dense_cuda(A_values, A_indices, A_metadata, B_values, m, k, n, vector_length, N, M);
 }
 
@@ -88,6 +91,7 @@ torch::Tensor spmm_dense_trans( torch::Tensor A_values,
                                 int vector_length,
                                 int N,
                                 int M){
+    // printf("[spmm_dense_trans] N=%d, M=%d\n", N, M);
     return spmm_dense_trans_cuda(A_values, A_indices, A_metadata, B_values, m, k, n, vector_length, N, M);
 }
 
@@ -102,6 +106,7 @@ torch::Tensor spmm_weighted_dense_trans(torch::Tensor A_values,
                                         int vector_length,
                                         int N,
                                         int M){
+    // printf("[spmm_weighted_dense_trans] N=%d, M=%d\n", N, M);
     return spmm_weighted_dense_trans_cuda(A_values, A_indices, A_metadata, B_values, routing_weights, m, k, n, vector_length, N, M);
 }
 
@@ -118,6 +123,7 @@ torch::Tensor spmm_weighted_sparse_trans(torch::Tensor A_values,
                    int N,
                    int M,
                    int batch_size){
+    // printf("[spmm_weighted_sparse_trans] N=%d, M=%d\n", N, M);
     return spmm_weighted_sparse_trans_cuda(A_values, A_indices, A_metadata, B_values, B_indices, routing_weights, batch_size, m, k, n, vector_length, N, M);
 }
 

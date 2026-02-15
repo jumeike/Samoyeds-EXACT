@@ -42,6 +42,8 @@ parser.add_argument('--intermediate_size', type=int, default=14336)
 parser.add_argument('--experts', type=int, default=8)
 
 parser.add_argument('--flash', action='store_true', default=False)
+parser.add_argument('--trace_small', action='store_true', default=False,
+                    help='Use tiny run setup for tracing/debug (pairs with sparsifier debug).')
 
 args = parser.parse_args()
 
@@ -53,6 +55,14 @@ use_flash = args.flash
 
 WARMUP = 10
 ITER = 100
+
+if args.trace_small:
+    # Keep model dimensions unchanged to avoid invalid kernel configs,
+    # but reduce runtime workload to make tracing practical.
+    args.batch_size = 1
+    args.seq_len = 64
+    WARMUP = 0
+    ITER = 1
 
 # setup Mixtral configuration
 configuration = MixtralConfig(
@@ -136,7 +146,7 @@ def mixtral_mlp_run():
 
 def mixtral_decoder_layer_run():
     # ================= MixtralDecoderLayer的替换 =================
-    ss_model = sparsemoeblock_to_ss(MixtralDecoderLayer(configuration, 0)).half().cuda()
+    ss_model = sparsemoeblock_to_ss(MixtralDecoderLayer(configuration, 0), skip_sparsifier=False).half().cuda()
     ss_model.eval()
     # print("Aftering loading MixtralDecoderLayer...")
 
@@ -235,5 +245,4 @@ if __name__ == "__main__":
         mixtral_decoder_layer_run()
     if args.model:
         mixtral_model_run()
-
 

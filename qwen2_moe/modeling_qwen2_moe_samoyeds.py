@@ -48,111 +48,189 @@ logger = logging.get_logger(__name__)
 from module.linear.SSFusedSiluTransLinear import SSFusedSiluTransLinear
 from module.linear.SPDenseWeightedTransLinear import SPDenseWeightedLinear
 from module.linear.SSTransLinear import SSTransLinear
+
+_CONFIG_FOR_DOC = "Qwen2MoeConfig"
 from module.linear.SPDenseTransLinear import SPDenseTransLinear
 
 class SSQwen2MoeMLP(nn.Module):
-    def __init__(self, config, intermediate_size=None):
+    def __init__(self, config, intermediate_size=None, use_dense=False, skip_sparsifier=False):
         super().__init__()
         self.config = config
         self.hidden_size = config.hidden_size
         self.intermediate_size = intermediate_size
-        self.gate_proj = SSFusedSiluTransLinear(nn.Linear(self.hidden_size, self.intermediate_size, bias=False))
-        self.up_proj = SSTransLinear(nn.Linear(self.hidden_size, self.intermediate_size, bias=False))
-        self.down_proj = SPDenseWeightedLinear(nn.Linear(self.intermediate_size, self.hidden_size, bias=False))
-        
+        self.use_dense = use_dense
         self.act_fn = ACT2FN[config.hidden_act]
 
-    def forward(self, hidden_states, input_idx, routing_weights):
-        # return self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
-        current_hidden_states = self.gate_proj(hidden_states, input_idx) * self.up_proj(hidden_states, input_idx)
+        if use_dense:
+            # Dense layers for evaluation with pretrained weights
+            self.gate_proj = nn.Linear(self.hidden_size, self.intermediate_size, bias=False)
+            self.up_proj = nn.Linear(self.hidden_size, self.intermediate_size, bias=False)
+            self.down_proj = nn.Linear(self.intermediate_size, self.hidden_size, bias=False)
+        elif skip_sparsifier:
+            # Create layers WITHOUT calling sparsifier (EXACT will set weights later)
+            self.gate_proj = SSFusedSiluTransLinear(None, self.hidden_size, self.intermediate_size, skip_sparsifier=True)
+            self.up_proj = SSTransLinear(None, self.hidden_size, self.intermediate_size, skip_sparsifier=True)
+            self.down_proj = SPDenseWeightedLinear(None, self.intermediate_size, self.hidden_size, skip_sparsifier=True)
+            # print("Initialized SSQwen2MoeMLP with skip_sparsifier=True")
+        else: # use_dense == False
+            # Sparse layers for benchmarking (backward compatible)
+            self.gate_proj = SSFusedSiluTransLinear(nn.Linear(self.hidden_size, self.intermediate_size, bias=False))
+            self.up_proj = SSTransLinear(nn.Linear(self.hidden_size, self.intermediate_size, bias=False))
+            self.down_proj = SPDenseWeightedLinear(nn.Linear(self.intermediate_size, self.hidden_size, bias=False))
 
-        current_hidden_states = self.down_proj(current_hidden_states, routing_weights.T)[0:input_idx.shape[0], ]
-        
-        return current_hidden_states
+    def forward(self, hidden_states, input_idx=None, routing_weights=None):
+        if self.use_dense:
+            # Dense path - simple forward
+            return self.down_proj(self.act_fn(self.gate_proj(hidden_states)) * self.up_proj(hidden_states))
+        else:
+            # Sparse path - requires index and routing weights
+            current_hidden_states = self.gate_proj(hidden_states, input_idx) * self.up_proj(hidden_states, input_idx)
+            current_hidden_states = self.down_proj(current_hidden_states, routing_weights.T)[0:input_idx.shape[0], ]
+            return current_hidden_states
     
 class SharedQwen2MoeMLP(nn.Module):
-    def __init__(self, config, intermediate_size=None):
+    def __init__(self, config, intermediate_size=None, use_dense=False):
         super().__init__()
         self.config = config
         self.hidden_size = config.hidden_size
         self.intermediate_size = intermediate_size
-        self.gate_proj = SPDenseTransLinear(nn.Linear(self.hidden_size, self.intermediate_size, bias=False))
-        self.up_proj = SPDenseTransLinear(nn.Linear(self.hidden_size, self.intermediate_size, bias=False))
-        self.down_proj = SPDenseTransLinear(nn.Linear(self.intermediate_size, self.hidden_size, bias=False))
+        self.use_dense = use_dense
         self.act_fn = ACT2FN[config.hidden_act]
 
-    def forward(self, hidden_states):
-        orig_shape = hidden_states.shape
-        hidden_states = hidden_states.view(-1, hidden_states.shape[-1])
-        return self.down_proj(self.act_fn(self.gate_proj(hidden_states)) * self.up_proj(hidden_states)).reshape(*orig_shape)
-        # current_hidden_states = self.act_fn(self.gate_proj(hidden_states)) * self.up_proj(hidden_states)
-        # current_hidden_states = self.down_proj(current_hidden_states)
-        # return current_hidden_states
+        if use_dense:
+            # Dense layers for evaluation with pretrained weights
+            self.gate_proj = nn.Linear(self.hidden_size, self.intermediate_size, bias=False)
+            self.up_proj = nn.Linear(self.hidden_size, self.intermediate_size, bias=False)
+            self.down_proj = nn.Linear(self.intermediate_size, self.hidden_size, bias=False)
+        else:
+            # Sparse layers for benchmarking (backward compatible)
+            self.gate_proj = SPDenseTransLinear(nn.Linear(self.hidden_size, self.intermediate_size, bias=False))
+            self.up_proj = SPDenseTransLinear(nn.Linear(self.hidden_size, self.intermediate_size, bias=False))
+            self.down_proj = SPDenseTransLinear(nn.Linear(self.intermediate_size, self.hidden_size, bias=False))
+
+    def forward(self, x):
+        if self.use_dense:
+            # Dense path
+            return self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
+        else:
+            # Sparse path
+            orig_shape = x.shape
+            x = x.view(-1, x.shape[-1])
+            return self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x)).reshape(*orig_shape)
 
 class SSQwen2MoeSparseMoeBlock(nn.Module):
-    def __init__(self, config):
+    def __init__(self, config, use_dense: bool = False, skip_sparsifier=False):
         super().__init__()
         self.num_experts = config.num_experts
         self.top_k = config.num_experts_per_tok
         self.norm_topk_prob = config.norm_topk_prob
+        self.use_dense = use_dense
 
         # gating
         self.gate = nn.Linear(config.hidden_size, config.num_experts, bias=False)
         self.experts = nn.ModuleList(
-            [SSQwen2MoeMLP(config, intermediate_size=config.moe_intermediate_size) for _ in range(self.num_experts)]
+            [SSQwen2MoeMLP(config, intermediate_size=config.moe_intermediate_size, use_dense=use_dense, skip_sparsifier=skip_sparsifier) for _ in range(self.num_experts)]
         )
 
-        # self.shared_expert = Qwen2MoeMLP(config, intermediate_size=config.shared_expert_intermediate_size)
-        self.shared_expert = SharedQwen2MoeMLP(config, intermediate_size=config.shared_expert_intermediate_size)
+        # Shared expert is always dense (EXACT doesn't compress it)
+        self.shared_expert = SharedQwen2MoeMLP(config, intermediate_size=config.shared_expert_intermediate_size, use_dense=True)
         self.shared_expert_gate = torch.nn.Linear(config.hidden_size, 1, bias=False)
 
     def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
         """ """
         batch_size, sequence_length, hidden_dim = hidden_states.shape
-        hidden_states = hidden_states.view(-1, hidden_dim)
-        # router_logits: (batch * sequence_length, n_experts)
-        router_logits = self.gate(hidden_states)
+        hidden_states_flat = hidden_states.view(-1, hidden_dim)
+        router_logits = self.gate(hidden_states_flat)
 
         routing_weights = F.softmax(router_logits, dim=1, dtype=torch.float)
         routing_weights, selected_experts = torch.topk(routing_weights, self.top_k, dim=-1)
         if self.norm_topk_prob:
             routing_weights /= routing_weights.sum(dim=-1, keepdim=True)
-        # we cast back to the input dtype
-        routing_weights = routing_weights.to(hidden_states.dtype)
+        routing_weights = routing_weights.to(hidden_states_flat.dtype)
 
-        final_hidden_states = torch.zeros(
-            (batch_size * sequence_length, hidden_dim), dtype=hidden_states.dtype, device=hidden_states.device
-        )
+        # OPTIMIZATION 1: Pre-register buffer for zero allocation
+        if not hasattr(self, '_output_buffer') or self._output_buffer.shape[0] != hidden_states_flat.shape[0]:
+            self._output_buffer = torch.zeros_like(hidden_states_flat)
+        else:
+            self._output_buffer.zero_()
+        final_hidden_states = self._output_buffer
 
-        # One hot encode the selected experts to create an expert mask
-        # this will be used to easily index which expert is going to be sollicitated
-        expert_mask = torch.nn.functional.one_hot(selected_experts, num_classes=self.num_experts).permute(2, 1, 0)
+        if self.use_dense:
+            # expert_mask = torch.nn.functional.one_hot(selected_experts, num_classes=self.num_experts).permute(2, 1, 0)
+            # for expert_idx in range(self.num_experts):
+            #     expert_layer = self.experts[expert_idx]
+            #     idx, top_x = torch.where(expert_mask[expert_idx])
+            #     if top_x.shape[0] == 0:
+            #         continue
+                
+            #     # Validate indices to prevent illegal memory access
+            #     max_idx = hidden_states_flat.shape[0] - 1
+            #     if top_x.max() > max_idx or top_x.min() < 0:
+            #         print(f"[WARNING] Invalid indices detected in expert {expert_idx}: top_x range [{top_x.min()}, {top_x.max()}], valid range [0, {max_idx}]")
+            #         # Clamp indices to valid range
+            #         top_x = torch.clamp(top_x, 0, max_idx)
+                
+            #     current_state = hidden_states_flat[None, top_x].reshape(-1, hidden_states_flat.shape[-1])
+            #     current_hidden_states = expert_layer(current_state) * routing_weights[top_x, idx, None]
+            #     final_hidden_states.index_add_(0, top_x, current_hidden_states.to(hidden_states_flat.dtype))
+            # Simple dense path - matches HF semantics exactly
+            expert_mask = torch.nn.functional.one_hot(selected_experts, num_classes=self.num_experts).permute(2, 1, 0)
+            
+            for expert_idx in range(self.num_experts):
+                idx, top_x = torch.where(expert_mask[expert_idx])
+                if top_x.shape[0] == 0:
+                    continue
+                
+                current_state = hidden_states_flat[top_x]
+                current_hidden_states = self.experts[expert_idx](current_state) * routing_weights[top_x, idx, None]
+                final_hidden_states.index_add_(0, top_x, current_hidden_states.to(hidden_states_flat.dtype))
+        else:
+            # CRITICAL FIX: Minimize memory copies by reducing per-expert dispatching
+            # Flatten and batch process all top-k selections
+            num_tokens = hidden_states_flat.shape[0]
+            flat_selected = selected_experts.view(-1)
+            flat_weights = routing_weights.view(-1)
+            
+            # Create expanded token indices [0,0,0,0, 1,1,1,1, ..., N,N,N,N] for top_k=4
+            token_ids = torch.arange(num_tokens, device=hidden_states_flat.device).unsqueeze(1).expand(-1, self.top_k).reshape(-1)
+            
+            # Sort by expert for coalesced memory access
+            sorted_experts, sort_indices = flat_selected.sort(stable=True)
+            sorted_tokens = token_ids[sort_indices]
+            sorted_weights = flat_weights[sort_indices]
+            
+            # Compute expert boundaries
+            tokens_per_expert = torch.bincount(sorted_experts, minlength=self.num_experts)
+            expert_boundaries = tokens_per_expert.cumsum(0)
+            
+            # Process experts with tokens
+            start = 0
+            for expert_idx in range(self.num_experts):
+                end = expert_boundaries[expert_idx].item()
+                if start >= end:
+                    continue
+                
+                # Extract this expert's token batch
+                expert_token_ids = sorted_tokens[start:end]
+                expert_weights = sorted_weights[start:end].unsqueeze(-1)
+                
+                # Validate indices to prevent illegal memory access
+                max_idx = hidden_states_flat.shape[0] - 1
+                if expert_token_ids.max() > max_idx or expert_token_ids.min() < 0:
+                    print(f"[WARNING] Invalid indices detected in expert {expert_idx}: expert_token_ids range [{expert_token_ids.min()}, {expert_token_ids.max()}], valid range [0, {max_idx}]")
+                    # Clamp indices to valid range
+                    expert_token_ids = torch.clamp(expert_token_ids, 0, max_idx)
+                
+                # Run sparse expert kernel
+                expert_out = self.experts[expert_idx](hidden_states_flat, expert_token_ids, expert_weights)
+                
+                # Accumulate results (handles duplicate tokens from top-k)
+                final_hidden_states.index_add_(0, expert_token_ids, expert_out.to(hidden_states_flat.dtype))
+                
+                start = end
 
-        # Loop over all available experts in the model and perform the computation on each expert
-        for expert_idx in range(self.num_experts):
-            expert_layer = self.experts[expert_idx]
-            idx, top_x = torch.where(expert_mask[expert_idx])
-
-            if top_x.shape[0] == 0:
-                continue
-
-            top_x_list = top_x.tolist()
-            idx_list = idx.tolist()
-
-            # Index the correct hidden states and compute the expert hidden state for
-            # the current expert. We need to make sure to multiply the output hidden
-            # states by `routing_weights` on the corresponding tokens (top-1 and top-2)
-            # current_state = hidden_states[None, top_x].reshape(-1, hidden_dim)
-            # current_hidden_states = expert_layer(current_state) * routing_weights[top_x, idx, None]
-            current_hidden_states = expert_layer(hidden_states, top_x, routing_weights[top_x_list, idx_list, None])
-
-            # However `index_add_` only support torch tensors for indexing so we'll use
-            # the `top_x` tensor here.
-            # final_hidden_states = final_hidden_states + current_hidden_states.to(hidden_states.dtype)
-            final_hidden_states.index_add_(0, top_x, current_hidden_states.to(hidden_states.dtype))
-
-        shared_expert_output = self.shared_expert(hidden_states)
-        shared_expert_output = F.sigmoid(self.shared_expert_gate(hidden_states)) * shared_expert_output
+        shared_expert_output = self.shared_expert(hidden_states_flat)
+        shared_expert_output = F.sigmoid(self.shared_expert_gate(hidden_states_flat)) * shared_expert_output
 
         final_hidden_states = final_hidden_states + shared_expert_output
 
@@ -160,19 +238,48 @@ class SSQwen2MoeSparseMoeBlock(nn.Module):
         return final_hidden_states, router_logits
     
 class SSQwen2MoeDecoderLayer(nn.Module):
-    def __init__(self, config: Qwen2MoeConfig, layer_idx: int):
+    def __init__(self, config: Qwen2MoeConfig, layer_idx: int, use_dense: bool = False):
         super().__init__()
         self.hidden_size = config.hidden_size
 
         self.self_attn = QWEN2MOE_ATTENTION_CLASSES[config._attn_implementation](config, layer_idx)
 
         if config.num_experts > 0 and (layer_idx + 1) % config.decoder_sparse_step == 0:
-            self.mlp = SSQwen2MoeSparseMoeBlock(config)
+            # print(f"Layer {layer_idx}: Using MoE block (use_dense={use_dense})")
+            # self.mlp = SSQwen2MoeSparseMoeBlock(config, use_dense=use_dense)
+            if use_dense:
+                from qwen2_moe.modeling_qwen2_moe import Qwen2MoeSparseMoeBlock as HF_MoE
+                # print("Using HF MoE block for dense evaluation")
+                self.mlp = HF_MoE(config)
+            else:
+                self.mlp = SSQwen2MoeSparseMoeBlock(config, use_dense=use_dense) # False
         else:
+            print(f"Layer {layer_idx}: Using dense MLP block")
             self.mlp = Qwen2MoeMLP(config, intermediate_size=config.intermediate_size)
 
         self.input_layernorm = Qwen2MoeRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
         self.post_attention_layernorm = Qwen2MoeRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
+    # def __init__(self, config: Qwen2MoeConfig, layer_idx: int, use_dense: bool = False):
+    #     super().__init__()
+        
+    #     if use_dense:
+    #         # Use HF's complete decoder layer
+    #         from transformers.models.qwen2_moe.modeling_qwen2_moe import Qwen2MoeDecoderLayer
+    #         hf_layer = Qwen2MoeDecoderLayer(config, layer_idx)
+    #         self.__dict__.update(hf_layer.__dict__)
+    #         self._modules.update(hf_layer._modules)
+    #     else:
+    #         # Your sparse implementation
+    #         self.hidden_size = config.hidden_size
+    #         self.self_attn = QWEN2MOE_ATTENTION_CLASSES[config._attn_implementation](config, layer_idx)
+            
+    #         if config.num_experts > 0 and (layer_idx + 1) % config.decoder_sparse_step == 0:
+    #             self.mlp = SSQwen2MoeSparseMoeBlock(config, use_dense=False)
+    #         else:
+    #             self.mlp = Qwen2MoeMLP(config, intermediate_size=config.intermediate_size)
+            
+    #         self.input_layernorm = Qwen2MoeRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
+    #         self.post_attention_layernorm = Qwen2MoeRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
 
     def forward(
         self,
@@ -257,16 +364,18 @@ class SSQwen2MoeModel(Qwen2MoePreTrainedModel):
 
     Args:
         config: Qwen2MoeConfig
+        use_dense: If True, use dense layers in SharedQwen2MoeMLP. Default False for backward compatibility.
     """
 
-    def __init__(self, config: Qwen2MoeConfig):
+    def __init__(self, config: Qwen2MoeConfig, use_dense: bool = False):
         super().__init__(config)
         self.padding_idx = config.pad_token_id
         self.vocab_size = config.vocab_size
+        self.use_dense = use_dense
 
         self.embed_tokens = nn.Embedding(config.vocab_size, config.hidden_size, self.padding_idx)
         self.layers = nn.ModuleList(
-            [SSQwen2MoeDecoderLayer(config, layer_idx) for layer_idx in range(config.num_hidden_layers)]
+            [SSQwen2MoeDecoderLayer(config, layer_idx, use_dense=use_dense) for layer_idx in range(config.num_hidden_layers)]
         )
         self._attn_implementation = config._attn_implementation
         self.norm = Qwen2MoeRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
@@ -442,3 +551,265 @@ class SSQwen2MoeModel(Qwen2MoePreTrainedModel):
             attentions=all_self_attns,
             router_logits=all_router_logits,
         )
+
+
+@add_start_docstrings(
+    """
+    The Qwen2MoE Model with a language modeling head on top (linear layer with weights tied to the input embeddings).
+    """,
+    QWEN2MOE_START_DOCSTRING,
+)
+class SSQwen2MoeForCausalLM(Qwen2MoePreTrainedModel):
+    _tied_weights_keys = ["lm_head.weight"]
+
+    def __init__(self, config, use_dense: bool = False):
+        super().__init__(config)
+        self.model = SSQwen2MoeModel(config, use_dense=use_dense)
+        self.vocab_size = config.vocab_size
+        self.lm_head = nn.Linear(config.hidden_size, config.vocab_size, bias=False)
+
+        self.router_aux_loss_coef = config.router_aux_loss_coef
+        self.num_experts = config.num_experts
+        self.num_experts_per_tok = config.num_experts_per_tok
+        # Initialize weights and apply final processing
+        self.post_init()
+
+    def get_input_embeddings(self):
+        return self.model.embed_tokens
+
+    def set_input_embeddings(self, value):
+        self.model.embed_tokens = value
+
+    def get_output_embeddings(self):
+        return self.lm_head
+
+    def set_output_embeddings(self, new_embeddings):
+        self.lm_head = new_embeddings
+
+    def set_decoder(self, decoder):
+        self.model = decoder
+
+    def get_decoder(self):
+        return self.model
+
+    def forward(
+        self,
+        input_ids: torch.LongTensor = None,
+        attention_mask: Optional[torch.Tensor] = None,
+        position_ids: Optional[torch.LongTensor] = None,
+        past_key_values: Optional[List[torch.FloatTensor]] = None,
+        inputs_embeds: Optional[torch.FloatTensor] = None,
+        labels: Optional[torch.LongTensor] = None,
+        use_cache: Optional[bool] = None,
+        output_attentions: Optional[bool] = None,
+        output_hidden_states: Optional[bool] = None,
+        output_router_logits: Optional[bool] = None,
+        return_dict: Optional[bool] = None,
+    ) -> Union[Tuple, MoeCausalLMOutputWithPast]:
+        output_attentions = output_attentions if output_attentions is not None else self.config.output_attentions
+        output_router_logits = (
+            output_router_logits if output_router_logits is not None else self.config.output_router_logits
+        )
+        output_hidden_states = (
+            output_hidden_states if output_hidden_states is not None else self.config.output_hidden_states
+        )
+        return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+
+        # decoder outputs consists of (dec_features, layer_state, dec_hidden, dec_attn)
+        outputs = self.model(
+            input_ids=input_ids,
+            attention_mask=attention_mask,
+            position_ids=position_ids,
+            past_key_values=past_key_values,
+            inputs_embeds=inputs_embeds,
+            use_cache=use_cache,
+            output_attentions=output_attentions,
+            output_hidden_states=output_hidden_states,
+            output_router_logits=output_router_logits,
+            return_dict=return_dict,
+        )
+
+        hidden_states = outputs[0]
+        logits = self.lm_head(hidden_states)
+        logits = logits.float()
+
+        loss = None
+        if labels is not None:
+            # Shift so that tokens < n predict n
+            shift_logits = logits[..., :-1, :].contiguous()
+            shift_labels = labels[..., 1:].contiguous()
+            # Flatten the tokens
+            loss_fct = nn.CrossEntropyLoss()
+            shift_logits = shift_logits.view(-1, self.config.vocab_size)
+            shift_labels = shift_labels.view(-1)
+            # Enable model parallelism
+            shift_labels = shift_labels.to(shift_logits.device)
+            loss = loss_fct(shift_logits, shift_labels)
+
+        aux_loss = None
+        if output_router_logits:
+            aux_loss = load_balancing_loss_func(
+                outputs.router_logits if return_dict else outputs[-1],
+                self.num_experts,
+                self.num_experts_per_tok,
+                attention_mask,
+            )
+            if labels is not None:
+                loss += self.router_aux_loss_coef * aux_loss.to(loss.device)
+
+        if not return_dict:
+            output = (logits,) + outputs[1:]
+            return (loss,) + output if loss is not None else output
+
+        return MoeCausalLMOutputWithPast(
+            loss=loss,
+            aux_loss=aux_loss,
+            logits=logits,
+            past_key_values=outputs.past_key_values,
+            hidden_states=outputs.hidden_states,
+            attentions=outputs.attentions,
+            router_logits=outputs.router_logits,
+        )
+
+    def prepare_inputs_for_generation(
+        self, input_ids, past_key_values=None, attention_mask=None, inputs_embeds=None, **kwargs
+    ):
+        if past_key_values is not None:
+            if isinstance(past_key_values, Cache):
+                cache_length = past_key_values.get_seq_length()
+                past_length = past_key_values.seen_tokens
+                max_cache_length = past_key_values.get_max_length()
+            else:
+                cache_length = past_length = past_key_values[0][0].shape[2]
+                max_cache_length = None
+
+            # Keep only the unprocessed tokens:
+            # 1 - If the length of the attention_mask exceeds the length of input_ids, then we are in a setting where
+            # some of the inputs are exclusively passed as part of the cache (e.g. when passing input_embeds as
+            # input)
+            if attention_mask is not None and attention_mask.shape[1] > input_ids.shape[1]:
+                input_ids = input_ids[:, -(attention_mask.shape[1] - past_length) :]
+            # 2 - If the past_length is smaller than input_ids', then input_ids holds all input tokens. We can discard
+            # input_ids based on the past_length.
+            elif past_length < input_ids.shape[1]:
+                input_ids = input_ids[:, past_length:]
+            # 3 - Otherwise (past_length >= input_ids.shape[1]), let's assume input_ids only has unprocessed tokens.
+
+            # If we are about to go beyond the maximum cache length, we need to crop the input attention mask.
+            if (
+                max_cache_length is not None
+                and attention_mask is not None
+                and cache_length + input_ids.shape[1] > max_cache_length
+            ):
+                attention_mask = attention_mask[:, -max_cache_length:]
+
+        position_ids = kwargs.get("position_ids", None)
+        if attention_mask is not None and position_ids is None:
+            # create position_ids on the fly for batch generation
+            position_ids = attention_mask.long().cumsum(-1) - 1
+            position_ids.masked_fill_(attention_mask == 0, 1)
+            if past_key_values:
+                position_ids = position_ids[:, -input_ids.shape[1] :]
+
+        # if `inputs_embeds` are passed, we only want to use them in the 1st generation step
+        if inputs_embeds is not None and past_key_values is None:
+            model_inputs = {"inputs_embeds": inputs_embeds}
+        else:
+            model_inputs = {"input_ids": input_ids}
+
+        model_inputs.update(
+            {
+                "position_ids": position_ids,
+                "past_key_values": past_key_values,
+                "use_cache": kwargs.get("use_cache"),
+                "attention_mask": attention_mask,
+            }
+        )
+        return model_inputs
+
+    @staticmethod
+    def _reorder_cache(past_key_values, beam_idx):
+        reordered_past = ()
+        for layer_past in past_key_values:
+            reordered_past += (
+                tuple(past_state.index_select(0, beam_idx.to(past_state.device)) for past_state in layer_past),
+            )
+        return reordered_past
+
+
+def load_balancing_loss_func(
+    gate_logits: torch.Tensor, num_experts: int, top_k: int, attention_mask: Optional[torch.Tensor] = None
+) -> float:
+    r"""
+    Computes auxiliary load balancing loss as in Switch Transformer - implemented in Pytorch.
+
+    See Switch Transformer (https://arxiv.org/abs/2101.03961) for more details. This function implements the loss
+    function presented in equations (4) - (6) of the paper. It aims at penalizing cases where the routing between
+    experts is too unbalanced.
+
+    Args:
+        gate_logits (Union[`torch.Tensor`, Tuple[torch.Tensor]):
+            Logits from the `gate`, should be a tuple of model.config.num_hidden_layers tensors of
+            shape [batch_size X sequence_length, num_experts].
+        num_experts (`int`):
+            Number of experts.
+        top_k (`int`):
+            Number of experts to be selected per token.
+        attention_mask (`torch.Tensor`, *optional*):
+            The attention_mask used in forward function
+            shape [batch_size X sequence_length] if not None.
+
+    Returns:
+        The auxiliary loss.
+    """
+    if gate_logits is None or not isinstance(gate_logits, tuple):
+        return 0
+
+    if isinstance(gate_logits, tuple):
+        compute_device = gate_logits[0].device
+        concatenated_gate_logits = torch.cat([layer_gate.to(compute_device) for layer_gate in gate_logits], dim=0)
+
+    routing_weights = torch.nn.functional.softmax(concatenated_gate_logits, dim=-1)
+
+    _, selected_experts = torch.topk(routing_weights, top_k, dim=-1)
+
+    expert_mask = torch.nn.functional.one_hot(selected_experts, num_experts)
+
+    if attention_mask is None:
+        # Compute the percentage of tokens routed to each experts
+        tokens_per_expert = torch.mean(expert_mask.float(), dim=0)
+
+        # Compute the average probability of routing to these experts
+        router_prob_per_expert = torch.mean(routing_weights, dim=0)
+    else:
+        batch_size, sequence_length = attention_mask.shape
+        num_hidden_layers = concatenated_gate_logits.shape[0] // (batch_size * sequence_length)
+
+        # Compute the mask that masks all padding tokens as 0 with the same shape of expert_mask
+        expert_attention_mask = (
+            attention_mask[None, :, :, None, None]
+            .expand((num_hidden_layers, batch_size, sequence_length, top_k, num_experts))
+            .reshape(-1, top_k, num_experts)
+            .to(compute_device)
+        )
+
+        # Compute the percentage of tokens routed to each experts
+        tokens_per_expert = torch.sum(expert_mask.float() * expert_attention_mask, dim=0) / torch.sum(
+            expert_attention_mask, dim=0
+        )
+
+        # Compute the mask that masks all padding tokens as 0 with the same shape of tokens_per_expert
+        router_per_expert_attention_mask = (
+            attention_mask[None, :, :, None]
+            .expand((num_hidden_layers, batch_size, sequence_length, num_experts))
+            .reshape(-1, num_experts)
+            .to(compute_device)
+        )
+
+        # Compute the average probability of routing to these experts
+        router_prob_per_expert = torch.sum(routing_weights * router_per_expert_attention_mask, dim=0) / torch.sum(
+            router_per_expert_attention_mask, dim=0
+        )
+
+    overall_loss = torch.sum(tokens_per_expert * router_prob_per_expert.unsqueeze(0))
+    return overall_loss * num_experts

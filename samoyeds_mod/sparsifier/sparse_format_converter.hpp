@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-// #include <stdio>
+#include <cstdio>
+#include <cstdlib>
 #include <random>
 #include <iostream>
 #include <cuda_fp16.h>
@@ -142,21 +143,21 @@ void create_metadata_randomly(uint *A_metadata,
                               int structure_N,
                               int structure_M) {
     int metadata_rows = A_rows / structure_M * structure_N;
-    int metadata_cols = A_cols / SPTC_M * SPTC_N / NUM_OF_META_PER_UINT;
+    int metadata_cols = A_cols / structure_M * structure_N / NUM_OF_META_PER_UINT;
 
     std::vector <uint> temp;
-    temp.reserve(SPTC_M);
-    for (int i = 0; i < SPTC_M; i++) {
+    temp.reserve(structure_M);
+    for (int i = 0; i < structure_M; i++) {
         temp.push_back(i);
     }
 
     for (int iter_rows = 0; iter_rows < metadata_rows; ++iter_rows) {
         for (int iter_cols = 0; iter_cols < metadata_cols; ++iter_cols) {
             uint temp_meta = 0;
-            for (int i = 0; i < NUM_OF_META_PER_UINT; i += SPTC_N) {
+            for (int i = 0; i < NUM_OF_META_PER_UINT; i += structure_N) {
                 random_shuffle(temp.begin(), temp.end());
-                std::sort(temp.begin(), temp.begin() + SPTC_N);
-                for (int j = 0; j < SPTC_N; ++j) {
+                std::sort(temp.begin(), temp.begin() + structure_N);
+                for (int j = 0; j < structure_N; ++j) {
                     temp_meta = temp_meta | temp[j] << ((i + j) * METADATA_SIZE);
                 }
             }
@@ -194,14 +195,14 @@ void create_value(half *A_data,
     int indices_rows = A_rows / structure_M * structure_N;
     int indices_cols = A_cols / vector_length;
     int metadata_rows = A_rows / structure_M * structure_N;
-    int metadata_cols = A_cols / SPTC_M * SPTC_N / NUM_OF_META_PER_UINT;
+    int metadata_cols = A_cols / structure_M * structure_N / NUM_OF_META_PER_UINT;
     int value_rows = A_rows / structure_M * structure_N;
-    int value_cols = A_cols / SPTC_M * SPTC_N;
+    int value_cols = A_cols / structure_M * structure_N;
 
     for (int iter_row = 0; iter_row < value_rows; ++iter_row) {
-        for (int iter_col = 0; iter_col < value_cols; iter_col += SPTC_N) {
+        for (int iter_col = 0; iter_col < value_cols; iter_col += structure_N) {
             int indices_row_idx = iter_row;
-            int indices_col_idx = iter_col / (vector_length / SPTC_M * SPTC_N);
+            int indices_col_idx = iter_col / (vector_length / structure_M * structure_N);
             int selected_index = A_indices[indices_row_idx * indices_cols + indices_col_idx];
             int row_offset = iter_row / structure_N * structure_M + selected_index;
 
@@ -209,19 +210,19 @@ void create_value(half *A_data,
             int metadata_col_idx = iter_col / NUM_OF_META_PER_UINT;
             int metadata_inside_idx =
                     iter_col % NUM_OF_META_PER_UINT; //每个uint包含NUM_OF_META_PER_UINT(16)个metadata，计算需要取到第几位
-            int mask = ((0b1 << (SPTC_N * METADATA_SIZE)) - 1) << (metadata_inside_idx * METADATA_SIZE);
+            int mask = ((0b1 << (structure_N * METADATA_SIZE)) - 1) << (metadata_inside_idx * METADATA_SIZE);
             uint selected_metadata = (A_metadata[metadata_row_idx * metadata_cols + metadata_col_idx] & mask)
                     >> (metadata_inside_idx * METADATA_SIZE);
-            int selected_metadata_entry[SPTC_N];
+            int selected_metadata_entry[structure_N];
             int temp = static_cast<int>(selected_metadata);
             int divider = 0b1 << METADATA_SIZE;
-            for (int i = 0; i < SPTC_N; ++i) {
+            for (int i = 0; i < structure_N; ++i) {
                 selected_metadata_entry[i] = temp % divider;
                 temp /= divider;
             }
-            for (int i = 0; i < SPTC_N; ++i) {
+            for (int i = 0; i < structure_N; ++i) {
                 int des = iter_row * value_cols + iter_col + i;
-                int index = row_offset * A_cols + iter_col / SPTC_N * SPTC_M + selected_metadata_entry[i];
+                int index = row_offset * A_cols + iter_col / structure_N * structure_M + selected_metadata_entry[i];
                 A_value[iter_row * value_cols + iter_col + i] =
                         A_data[index];
             }
@@ -341,6 +342,29 @@ void sparsifier_c_impl(half *A_data,
                        int vector_length,
                        int structure_N,
                        int structure_M) {
+    const char* dbg_env = std::getenv("SAMOYEDS_SPARSE_DEBUG");
+    const bool dbg = (dbg_env && dbg_env[0] == '1');
+    int dbg_max = 8;
+    const char* dbg_max_env = std::getenv("SAMOYEDS_SPARSE_DEBUG_MAX");
+    if (dbg_max_env) {
+        const int parsed = std::atoi(dbg_max_env);
+        if (parsed > 0) {
+            dbg_max = parsed;
+        }
+    }
+    static int dbg_call_count = 0;
+    const bool dbg_this = dbg && (dbg_call_count < dbg_max);
+
+    if (dbg_this) {
+        std::printf("[SPARSIFIER DBG] call=%d N=%d M=%d rows=%d cols=%d vlen=%d\n",
+                    dbg_call_count, structure_N, structure_M, A_rows, A_cols, vector_length);
+    }
+
+    // printf("[C++ sparsifier] N=%d, M=%d, A_rows=%d, A_cols=%d\n", 
+    //    structure_N, structure_M, A_rows, A_cols);
+    // printf("[C++ sparsifier] value_rows=%d, value_cols=%d\n",
+    //     A_rows / structure_M * structure_N, 
+    //     A_cols / structure_M * structure_N);
     // create_indices_ordered(A_indices, A_rows, A_cols, vector_length, structure_N, structure_M);
     create_indices_randomly(A_indices, A_rows, A_cols, vector_length, structure_N, structure_M);
 
@@ -350,6 +374,22 @@ void sparsifier_c_impl(half *A_data,
     create_value(A_data, A_value, A_indices, A_metadata, A_rows, A_cols, vector_length, structure_N, structure_M);
 
     transpose_indices(A_indices, A_rows, A_cols, vector_length, structure_N, structure_M, true);
+
+    if (dbg_this) {
+        const int indices_rows = A_rows / structure_M * structure_N;
+        const int indices_cols = A_cols / vector_length;
+        const int metadata_rows = A_rows / structure_M * structure_N;
+        const int metadata_cols = A_cols / structure_M * structure_N / NUM_OF_META_PER_UINT;
+        const int value_rows = A_rows / structure_M * structure_N;
+        const int value_cols = A_cols / structure_M * structure_N;
+        std::printf("[SPARSIFIER DBG] shapes value=(%d,%d) indices=(%d,%d) metadata=(%d,%d)\n",
+                    value_rows, value_cols, indices_rows, indices_cols, metadata_rows, metadata_cols);
+        std::printf("[SPARSIFIER DBG] sample idx0=%u meta0=0x%08x val0=%f\n",
+                    (unsigned)A_indices[0], (unsigned)A_metadata[0], __half2float(A_value[0]));
+    }
+    if (dbg) {
+        dbg_call_count++;
+    }
 }
 
 void pruned_A_c_impl(half *A_pruned_value,
