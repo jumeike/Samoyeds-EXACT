@@ -1,0 +1,12 @@
+Running with m=14336, n=4096, k=4096
+1.08094
+Running with m=16384, n=4096, k=6144
+3.00756
+Running with m=5760, n=4096, k=2304
+0.244352
+Running with m=8192, n=4096, k=2048
+0.327859
+Running with m=12288, n=4096, k=3072
+0.740061
+Running with m=1408, n=4096, k=2048
+0.0512909

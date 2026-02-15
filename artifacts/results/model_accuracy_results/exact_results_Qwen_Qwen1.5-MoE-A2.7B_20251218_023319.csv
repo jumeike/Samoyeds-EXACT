@@ -1,0 +1,2 @@
+task,dense_acc,exact_acc,accuracy_drop
+arc_easy,26.262626262626267,24.873737373737374,1.3888888888888924

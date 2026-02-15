@@ -1,0 +1,374 @@
+{
+  "num_experts": 60,
+  "layers": {
+    "0": {
+      "total_tokens": 1024000,
+      "expert_stats": {
+        "0": {
+          "count": 849948,
+          "percentage": 20.75068359375,
+          "activation_rate": 0.2075068359375
+        },
+        "1": {
+          "count": 161144,
+          "percentage": 3.9341796875000004,
+          "activation_rate": 0.039341796875
+        },
+        "2": {
+          "count": 391,
+          "percentage": 0.0095458984375,
+          "activation_rate": 9.5458984375e-05
+        },
+        "3": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "4": {
+          "count": 6,
+          "percentage": 0.000146484375,
+          "activation_rate": 1.46484375e-06
+        },
+        "5": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "6": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "7": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "8": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "9": {
+          "count": 392802,
+          "percentage": 9.589892578125001,
+          "activation_rate": 0.09589892578125
+        },
+        "10": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "11": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "12": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "13": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "14": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "15": {
+          "count": 29,
+          "percentage": 0.0007080078125000001,
+          "activation_rate": 7.080078125e-06
+        },
+        "16": {
+          "count": 382273,
+          "percentage": 9.3328369140625,
+          "activation_rate": 0.093328369140625
+        },
+        "17": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "18": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "19": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "20": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "21": {
+          "count": 3406,
+          "percentage": 0.083154296875,
+          "activation_rate": 0.00083154296875
+        },
+        "22": {
+          "count": 103,
+          "percentage": 0.0025146484374999997,
+          "activation_rate": 2.5146484375e-05
+        },
+        "23": {
+          "count": 451542,
+          "percentage": 11.023974609375,
+          "activation_rate": 0.11023974609375
+        },
+        "24": {
+          "count": 31779,
+          "percentage": 0.7758544921875,
+          "activation_rate": 0.007758544921875
+        },
+        "25": {
+          "count": 35187,
+          "percentage": 0.8590576171875,
+          "activation_rate": 0.008590576171875
+        },
+        "26": {
+          "count": 3,
+          "percentage": 7.32421875e-05,
+          "activation_rate": 7.32421875e-07
+        },
+        "27": {
+          "count": 49819,
+          "percentage": 1.2162841796875001,
+          "activation_rate": 0.012162841796875
+        },
+        "28": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "29": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "30": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "31": {
+          "count": 201,
+          "percentage": 0.0049072265625,
+          "activation_rate": 4.9072265625e-05
+        },
+        "32": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "33": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "34": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "35": {
+          "count": 519510,
+          "percentage": 12.683349609375,
+          "activation_rate": 0.12683349609375
+        },
+        "36": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "37": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "38": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "39": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "40": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "41": {
+          "count": 1295,
+          "percentage": 0.0316162109375,
+          "activation_rate": 0.000316162109375
+        },
+        "42": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "43": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "44": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "45": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "46": {
+          "count": 77946,
+          "percentage": 1.9029785156249999,
+          "activation_rate": 0.01902978515625
+        },
+        "47": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "48": {
+          "count": 121341,
+          "percentage": 2.9624267578124996,
+          "activation_rate": 0.029624267578125
+        },
+        "49": {
+          "count": 245,
+          "percentage": 0.0059814453125,
+          "activation_rate": 5.9814453125e-05
+        },
+        "50": {
+          "count": 1006394,
+          "percentage": 24.570166015625,
+          "activation_rate": 0.24570166015625
+        },
+        "51": {
+          "count": 1,
+          "percentage": 2.44140625e-05,
+          "activation_rate": 2.44140625e-07
+        },
+        "52": {
+          "count": 10634,
+          "percentage": 0.259619140625,
+          "activation_rate": 0.00259619140625
+        },
+        "53": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "54": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "55": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "56": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "57": {
+          "count": 1,
+          "percentage": 2.44140625e-05,
+          "activation_rate": 2.44140625e-07
+        },
+        "58": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "59": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        }
+      }
+    }
+  },
+  "hot_experts": [
+    0,
+    1,
+    9,
+    16,
+    23,
+    27,
+    35,
+    46,
+    48,
+    50
+  ],
+  "cold_experts": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    24,
+    25,
+    26,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    47,
+    49,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59
+  ]
+}

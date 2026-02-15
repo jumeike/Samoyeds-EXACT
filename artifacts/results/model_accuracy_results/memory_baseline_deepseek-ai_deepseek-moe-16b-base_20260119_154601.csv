@@ -1,0 +1,2 @@
+dense_inference_peak_gpu_gb,dense_inference_delta_gpu_gb,dense_inference_final_cpu_rss_gb,samoyed_inference_peak_gpu_gb,samoyed_inference_delta_gpu_gb,samoyed_inference_final_cpu_rss_gb,overall_peak_gpu_gb,model,tasks,batch_size
+30.82257843017578,-0.044109344482421875,21.487442016601562,30.89093780517578,-0.052043914794921875,89.96151351928711,30.89093780517578,deepseek-ai/deepseek-moe-16b-base,mmlu_astronomy,1

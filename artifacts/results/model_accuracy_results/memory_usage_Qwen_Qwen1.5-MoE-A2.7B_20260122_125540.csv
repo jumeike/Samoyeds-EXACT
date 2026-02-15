@@ -1,0 +1,2 @@
+exact_inference_peak_gpu_gb,exact_inference_delta_gpu_gb,exact_inference_final_cpu_rss_gb,overall_peak_gpu_gb,model,tasks,batch_size,skip_baseline
+10.84087085723877,0.011962890625,64.4360466003418,10.84087085723877,Qwen/Qwen1.5-MoE-A2.7B,mmlu_astronomy,1,True

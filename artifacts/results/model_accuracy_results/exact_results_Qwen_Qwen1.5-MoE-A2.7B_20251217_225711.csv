@@ -1,0 +1,2 @@
+task,dense_acc,exact_acc,accuracy_drop
+openbookqa,19.0,16.400000000000002,2.5999999999999996

@@ -1,0 +1,5 @@
+model,batch_size,num_experts,intermediate_size,hidden_size,seq_len,exact_memory_mb,dense_memory_mb,samoyeds_memory_mb,exact_vs_dense_savings_pct,exact_vs_samoyeds_savings_pct
+mixtral,1,8,14336,4096,4096,0.00,0.00,0.00,0.00,0.00
+mixtral,1,8,16384,6144,4096,0.00,0.00,0.00,0.00,0.00
+deepseek,16,64,1408,2048,4096,0.00,0.00,0.00,0.00,0.00
+qwen2_moe,14,60,1408,2048,4096,0.00,0.00,0.00,0.00,0.00

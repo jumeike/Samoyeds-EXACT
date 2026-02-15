@@ -1,0 +1,62 @@
+{
+  "num_experts": 8,
+  "layers": {
+    "0": {
+      "total_tokens": 1024000,
+      "expert_stats": {
+        "0": {
+          "count": 422570,
+          "percentage": 20.63330078125,
+          "activation_rate": 0.2063330078125
+        },
+        "1": {
+          "count": 121435,
+          "percentage": 5.929443359375,
+          "activation_rate": 0.05929443359375
+        },
+        "2": {
+          "count": 238890,
+          "percentage": 11.66455078125,
+          "activation_rate": 0.1166455078125
+        },
+        "3": {
+          "count": 232715,
+          "percentage": 11.363037109375,
+          "activation_rate": 0.11363037109375
+        },
+        "4": {
+          "count": 0,
+          "percentage": 0.0,
+          "activation_rate": 0.0
+        },
+        "5": {
+          "count": 8360,
+          "percentage": 0.408203125,
+          "activation_rate": 0.00408203125
+        },
+        "6": {
+          "count": 1024000,
+          "percentage": 50.0,
+          "activation_rate": 0.5
+        },
+        "7": {
+          "count": 30,
+          "percentage": 0.00146484375,
+          "activation_rate": 1.46484375e-05
+        }
+      }
+    }
+  },
+  "hot_experts": [
+    0,
+    2,
+    3,
+    6
+  ],
+  "cold_experts": [
+    1,
+    4,
+    5,
+    7
+  ]
+}

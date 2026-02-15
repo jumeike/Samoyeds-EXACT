@@ -1,0 +1,4 @@
+{
+  "transformer_layer_cls_to_wrap": "Qwen2MoeDecoderLayer",
+  "use_orig_params": true
+}

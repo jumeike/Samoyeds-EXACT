@@ -1,0 +1,1949 @@
+{
+  "num_experts": 8,
+  "num_layers": 32,
+  "layers": {
+    "0": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 2826,
+          "percentage": 11.621977298897846,
+          "activation_rate": 0.11621977298897845
+        },
+        "1": {
+          "count": 3153,
+          "percentage": 12.966770850468828,
+          "activation_rate": 0.12966770850468828
+        },
+        "2": {
+          "count": 3120,
+          "percentage": 12.83105773975983,
+          "activation_rate": 0.1283105773975983
+        },
+        "3": {
+          "count": 2980,
+          "percentage": 12.25530514887317,
+          "activation_rate": 0.1225530514887317
+        },
+        "4": {
+          "count": 2567,
+          "percentage": 10.556835005757526,
+          "activation_rate": 0.10556835005757526
+        },
+        "5": {
+          "count": 3463,
+          "percentage": 14.241651587432145,
+          "activation_rate": 0.14241651587432144
+        },
+        "6": {
+          "count": 3340,
+          "percentage": 13.73581181115315,
+          "activation_rate": 0.1373581181115315
+        },
+        "7": {
+          "count": 2867,
+          "percentage": 11.79059055765751,
+          "activation_rate": 0.1179059055765751
+        }
+      },
+      "entropy": 2.0754191623378704,
+      "entropy_norm": 0.9980656444235908,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": []
+      }
+    },
+    "1": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 2750,
+          "percentage": 11.309425892416517,
+          "activation_rate": 0.11309425892416516
+        },
+        "1": {
+          "count": 3397,
+          "percentage": 13.970225366014146,
+          "activation_rate": 0.13970225366014147
+        },
+        "2": {
+          "count": 4283,
+          "percentage": 17.613916762625433,
+          "activation_rate": 0.1761391676262543
+        },
+        "3": {
+          "count": 2424,
+          "percentage": 9.968744859351867,
+          "activation_rate": 0.09968744859351868
+        },
+        "4": {
+          "count": 3090,
+          "percentage": 12.70768218456983,
+          "activation_rate": 0.1270768218456983
+        },
+        "5": {
+          "count": 3155,
+          "percentage": 12.974995887481494,
+          "activation_rate": 0.12974995887481494
+        },
+        "6": {
+          "count": 3004,
+          "percentage": 12.35400559302517,
+          "activation_rate": 0.12354005593025169
+        },
+        "7": {
+          "count": 2213,
+          "percentage": 9.101003454515546,
+          "activation_rate": 0.09101003454515545
+        }
+      },
+      "entropy": 2.060774214014163,
+      "entropy_norm": 0.9910229129833616,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cold": [
+          7
+        ]
+      }
+    },
+    "2": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3074,
+          "percentage": 12.641881888468498,
+          "activation_rate": 0.12641881888468498
+        },
+        "1": {
+          "count": 3457,
+          "percentage": 14.216976476394144,
+          "activation_rate": 0.14216976476394144
+        },
+        "2": {
+          "count": 2980,
+          "percentage": 12.25530514887317,
+          "activation_rate": 0.1225530514887317
+        },
+        "3": {
+          "count": 2927,
+          "percentage": 12.037341668037506,
+          "activation_rate": 0.12037341668037506
+        },
+        "4": {
+          "count": 3445,
+          "percentage": 14.167626254318144,
+          "activation_rate": 0.14167626254318144
+        },
+        "5": {
+          "count": 2781,
+          "percentage": 11.436913966112847,
+          "activation_rate": 0.11436913966112848
+        },
+        "6": {
+          "count": 3257,
+          "percentage": 13.39447277512749,
+          "activation_rate": 0.1339447277512749
+        },
+        "7": {
+          "count": 2395,
+          "percentage": 9.849481822668201,
+          "activation_rate": 0.09849481822668202
+        }
+      },
+      "entropy": 2.073317080937655,
+      "entropy_norm": 0.9970547569530456,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cold": [
+          7
+        ]
+      }
+    },
+    "3": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3142,
+          "percentage": 12.921533146899161,
+          "activation_rate": 0.1292153314689916
+        },
+        "1": {
+          "count": 3829,
+          "percentage": 15.746833360750124,
+          "activation_rate": 0.15746833360750123
+        },
+        "2": {
+          "count": 2029,
+          "percentage": 8.344300049350222,
+          "activation_rate": 0.08344300049350221
+        },
+        "3": {
+          "count": 2395,
+          "percentage": 9.849481822668201,
+          "activation_rate": 0.09849481822668202
+        },
+        "4": {
+          "count": 4085,
+          "percentage": 16.799638098371442,
+          "activation_rate": 0.16799638098371442
+        },
+        "5": {
+          "count": 3010,
+          "percentage": 12.378680704063168,
+          "activation_rate": 0.12378680704063168
+        },
+        "6": {
+          "count": 3103,
+          "percentage": 12.761144925152163,
+          "activation_rate": 0.12761144925152162
+        },
+        "7": {
+          "count": 2723,
+          "percentage": 11.198387892745517,
+          "activation_rate": 0.11198387892745518
+        }
+      },
+      "entropy": 2.057208381010123,
+      "entropy_norm": 0.9893081097861727,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": [
+          2
+        ]
+      }
+    },
+    "4": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3028,
+          "percentage": 12.452706037177167,
+          "activation_rate": 0.12452706037177168
+        },
+        "1": {
+          "count": 2600,
+          "percentage": 10.692548116466524,
+          "activation_rate": 0.10692548116466524
+        },
+        "2": {
+          "count": 2467,
+          "percentage": 10.145583155124198,
+          "activation_rate": 0.10145583155124198
+        },
+        "3": {
+          "count": 3935,
+          "percentage": 16.18276032242145,
+          "activation_rate": 0.16182760322421452
+        },
+        "4": {
+          "count": 3274,
+          "percentage": 13.464385589735153,
+          "activation_rate": 0.13464385589735153
+        },
+        "5": {
+          "count": 2110,
+          "percentage": 8.677414048363218,
+          "activation_rate": 0.08677414048363218
+        },
+        "6": {
+          "count": 3199,
+          "percentage": 13.155946701760158,
+          "activation_rate": 0.13155946701760157
+        },
+        "7": {
+          "count": 3703,
+          "percentage": 15.22865602895213,
+          "activation_rate": 0.1522865602895213
+        }
+      },
+      "entropy": 2.060868119041626,
+      "entropy_norm": 0.99106807175584,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6,
+          7
+        ],
+        "cold": [
+          5
+        ]
+      }
+    },
+    "5": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 2727,
+          "percentage": 11.214837966770851,
+          "activation_rate": 0.1121483796677085
+        },
+        "1": {
+          "count": 3260,
+          "percentage": 13.406810330646488,
+          "activation_rate": 0.13406810330646488
+        },
+        "2": {
+          "count": 3077,
+          "percentage": 12.654219443987497,
+          "activation_rate": 0.12654219443987497
+        },
+        "3": {
+          "count": 3800,
+          "percentage": 15.62757032406646,
+          "activation_rate": 0.1562757032406646
+        },
+        "4": {
+          "count": 2815,
+          "percentage": 11.57673959532818,
+          "activation_rate": 0.1157673959532818
+        },
+        "5": {
+          "count": 3174,
+          "percentage": 13.053133739101828,
+          "activation_rate": 0.13053133739101827
+        },
+        "6": {
+          "count": 3131,
+          "percentage": 12.876295443329495,
+          "activation_rate": 0.12876295443329494
+        },
+        "7": {
+          "count": 2332,
+          "percentage": 9.590393156769206,
+          "activation_rate": 0.09590393156769206
+        }
+      },
+      "entropy": 2.0705932726655316,
+      "entropy_norm": 0.9957448820575373,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cold": [
+          7
+        ]
+      }
+    },
+    "6": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3282,
+          "percentage": 13.49728573778582,
+          "activation_rate": 0.1349728573778582
+        },
+        "1": {
+          "count": 3387,
+          "percentage": 13.929100180950815,
+          "activation_rate": 0.13929100180950815
+        },
+        "2": {
+          "count": 2334,
+          "percentage": 9.59861819378187,
+          "activation_rate": 0.09598618193781872
+        },
+        "3": {
+          "count": 1746,
+          "percentage": 7.1804573120579045,
+          "activation_rate": 0.07180457312057904
+        },
+        "4": {
+          "count": 3309,
+          "percentage": 13.608323737456818,
+          "activation_rate": 0.13608323737456818
+        },
+        "5": {
+          "count": 3654,
+          "percentage": 15.0271426221418,
+          "activation_rate": 0.150271426221418
+        },
+        "6": {
+          "count": 3601,
+          "percentage": 14.809179141306137,
+          "activation_rate": 0.14809179141306136
+        },
+        "7": {
+          "count": 3003,
+          "percentage": 12.349893074518835,
+          "activation_rate": 0.12349893074518835
+        }
+      },
+      "entropy": 2.0563170508827606,
+      "entropy_norm": 0.9888794706013257,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": [
+          3
+        ]
+      }
+    },
+    "7": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3547,
+          "percentage": 14.587103141964139,
+          "activation_rate": 0.1458710314196414
+        },
+        "1": {
+          "count": 3034,
+          "percentage": 12.477381148215166,
+          "activation_rate": 0.12477381148215166
+        },
+        "2": {
+          "count": 3683,
+          "percentage": 15.146405658825465,
+          "activation_rate": 0.15146405658825465
+        },
+        "3": {
+          "count": 3068,
+          "percentage": 12.617206777430498,
+          "activation_rate": 0.12617206777430498
+        },
+        "4": {
+          "count": 2454,
+          "percentage": 10.092120414541865,
+          "activation_rate": 0.10092120414541865
+        },
+        "5": {
+          "count": 2843,
+          "percentage": 11.691890113505512,
+          "activation_rate": 0.11691890113505511
+        },
+        "6": {
+          "count": 2900,
+          "percentage": 11.926303668366508,
+          "activation_rate": 0.11926303668366507
+        },
+        "7": {
+          "count": 2787,
+          "percentage": 11.461589077150848,
+          "activation_rate": 0.11461589077150847
+        }
+      },
+      "entropy": 2.0718319377903516,
+      "entropy_norm": 0.996340554068504,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": []
+      }
+    },
+    "8": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3963,
+          "percentage": 16.297910840598785,
+          "activation_rate": 0.16297910840598784
+        },
+        "1": {
+          "count": 2916,
+          "percentage": 11.99210396446784,
+          "activation_rate": 0.1199210396446784
+        },
+        "2": {
+          "count": 2780,
+          "percentage": 11.432801447606513,
+          "activation_rate": 0.11432801447606514
+        },
+        "3": {
+          "count": 2527,
+          "percentage": 10.392334265504195,
+          "activation_rate": 0.10392334265504195
+        },
+        "4": {
+          "count": 2185,
+          "percentage": 8.985852936338214,
+          "activation_rate": 0.08985852936338214
+        },
+        "5": {
+          "count": 3836,
+          "percentage": 15.775620990294456,
+          "activation_rate": 0.15775620990294456
+        },
+        "6": {
+          "count": 3456,
+          "percentage": 14.212863957887812,
+          "activation_rate": 0.1421286395788781
+        },
+        "7": {
+          "count": 2653,
+          "percentage": 10.910511597302188,
+          "activation_rate": 0.10910511597302187
+        }
+      },
+      "entropy": 2.0601006022270747,
+      "entropy_norm": 0.990698974188456,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7
+        ],
+        "cold": [
+          4
+        ]
+      }
+    },
+    "9": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3732,
+          "percentage": 15.347919065635796,
+          "activation_rate": 0.15347919065635796
+        },
+        "1": {
+          "count": 2919,
+          "percentage": 12.00444151998684,
+          "activation_rate": 0.1200444151998684
+        },
+        "2": {
+          "count": 2218,
+          "percentage": 9.121566047047212,
+          "activation_rate": 0.09121566047047212
+        },
+        "3": {
+          "count": 1970,
+          "percentage": 8.101661457476558,
+          "activation_rate": 0.08101661457476558
+        },
+        "4": {
+          "count": 4138,
+          "percentage": 17.017601579207106,
+          "activation_rate": 0.17017601579207106
+        },
+        "5": {
+          "count": 3943,
+          "percentage": 16.21566047047212,
+          "activation_rate": 0.16215660470472118
+        },
+        "6": {
+          "count": 3219,
+          "percentage": 13.238197071886823,
+          "activation_rate": 0.13238197071886823
+        },
+        "7": {
+          "count": 2177,
+          "percentage": 8.952952788287547,
+          "activation_rate": 0.08952952788287548
+        }
+      },
+      "entropy": 2.0442508631543457,
+      "entropy_norm": 0.9830768608685859,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": [
+          3
+        ]
+      }
+    },
+    "10": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3503,
+          "percentage": 14.406152327685476,
+          "activation_rate": 0.14406152327685476
+        },
+        "1": {
+          "count": 4225,
+          "percentage": 17.3753906892581,
+          "activation_rate": 0.17375390689258102
+        },
+        "2": {
+          "count": 2673,
+          "percentage": 10.992761967428853,
+          "activation_rate": 0.10992761967428853
+        },
+        "3": {
+          "count": 3182,
+          "percentage": 13.086033887152492,
+          "activation_rate": 0.13086033887152493
+        },
+        "4": {
+          "count": 3890,
+          "percentage": 15.997696989636454,
+          "activation_rate": 0.15997696989636453
+        },
+        "5": {
+          "count": 2618,
+          "percentage": 10.766573449580523,
+          "activation_rate": 0.10766573449580523
+        },
+        "6": {
+          "count": 2012,
+          "percentage": 8.274387234742555,
+          "activation_rate": 0.08274387234742556
+        },
+        "7": {
+          "count": 2213,
+          "percentage": 9.101003454515546,
+          "activation_rate": 0.09101003454515545
+        }
+      },
+      "entropy": 2.049525108719807,
+      "entropy_norm": 0.9856132368424931,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          7
+        ],
+        "cold": [
+          6
+        ]
+      }
+    },
+    "11": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3647,
+          "percentage": 14.998354992597468,
+          "activation_rate": 0.14998354992597468
+        },
+        "1": {
+          "count": 3657,
+          "percentage": 15.0394801776608,
+          "activation_rate": 0.150394801776608
+        },
+        "2": {
+          "count": 4042,
+          "percentage": 16.62279980259911,
+          "activation_rate": 0.1662279980259911
+        },
+        "3": {
+          "count": 369,
+          "percentage": 1.5175193288369797,
+          "activation_rate": 0.015175193288369797
+        },
+        "4": {
+          "count": 2163,
+          "percentage": 8.895377529198882,
+          "activation_rate": 0.08895377529198882
+        },
+        "5": {
+          "count": 4110,
+          "percentage": 16.902451061029776,
+          "activation_rate": 0.16902451061029775
+        },
+        "6": {
+          "count": 3091,
+          "percentage": 12.711794703076166,
+          "activation_rate": 0.12711794703076165
+        },
+        "7": {
+          "count": 3237,
+          "percentage": 13.312222405000822,
+          "activation_rate": 0.13312222405000823
+        }
+      },
+      "entropy": 1.9776593662447286,
+      "entropy_norm": 0.9510531200829602,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": [
+          3
+        ]
+      }
+    },
+    "12": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 4770,
+          "percentage": 19.616713275209737,
+          "activation_rate": 0.19616713275209738
+        },
+        "1": {
+          "count": 4176,
+          "percentage": 17.173877282447773,
+          "activation_rate": 0.17173877282447772
+        },
+        "2": {
+          "count": 3330,
+          "percentage": 13.694686626089817,
+          "activation_rate": 0.13694686626089816
+        },
+        "3": {
+          "count": 2650,
+          "percentage": 10.898174041783188,
+          "activation_rate": 0.10898174041783187
+        },
+        "4": {
+          "count": 3059,
+          "percentage": 12.5801941108735,
+          "activation_rate": 0.125801941108735
+        },
+        "5": {
+          "count": 2446,
+          "percentage": 10.059220266491199,
+          "activation_rate": 0.10059220266491199
+        },
+        "6": {
+          "count": 3262,
+          "percentage": 13.415035367659152,
+          "activation_rate": 0.13415035367659153
+        },
+        "7": {
+          "count": 623,
+          "percentage": 2.5620990294456325,
+          "activation_rate": 0.025620990294456324
+        }
+      },
+      "entropy": 1.9911055352473936,
+      "entropy_norm": 0.9575193605293267,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cold": [
+          7
+        ]
+      }
+    },
+    "13": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3113,
+          "percentage": 12.802270110215497,
+          "activation_rate": 0.12802270110215497
+        },
+        "1": {
+          "count": 4294,
+          "percentage": 17.659154466195098,
+          "activation_rate": 0.17659154466195098
+        },
+        "2": {
+          "count": 2552,
+          "percentage": 10.495147228162526,
+          "activation_rate": 0.10495147228162527
+        },
+        "3": {
+          "count": 2454,
+          "percentage": 10.092120414541865,
+          "activation_rate": 0.10092120414541865
+        },
+        "4": {
+          "count": 3177,
+          "percentage": 13.065471294620826,
+          "activation_rate": 0.13065471294620826
+        },
+        "5": {
+          "count": 3247,
+          "percentage": 13.353347590064155,
+          "activation_rate": 0.13353347590064155
+        },
+        "6": {
+          "count": 2621,
+          "percentage": 10.778911005099523,
+          "activation_rate": 0.10778911005099523
+        },
+        "7": {
+          "count": 2858,
+          "percentage": 11.75357789110051,
+          "activation_rate": 0.1175357789110051
+        }
+      },
+      "entropy": 2.0639125959628766,
+      "entropy_norm": 0.9925321556746364,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": []
+      }
+    },
+    "14": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3016,
+          "percentage": 12.403355815101168,
+          "activation_rate": 0.12403355815101168
+        },
+        "1": {
+          "count": 3006,
+          "percentage": 12.362230630037836,
+          "activation_rate": 0.12362230630037835
+        },
+        "2": {
+          "count": 2590,
+          "percentage": 10.651422931403191,
+          "activation_rate": 0.10651422931403191
+        },
+        "3": {
+          "count": 3578,
+          "percentage": 14.71459121566047,
+          "activation_rate": 0.1471459121566047
+        },
+        "4": {
+          "count": 1800,
+          "percentage": 7.4025333113999015,
+          "activation_rate": 0.07402533311399902
+        },
+        "5": {
+          "count": 3765,
+          "percentage": 15.483632176344795,
+          "activation_rate": 0.15483632176344794
+        },
+        "6": {
+          "count": 3381,
+          "percentage": 13.904425069912815,
+          "activation_rate": 0.13904425069912815
+        },
+        "7": {
+          "count": 3180,
+          "percentage": 13.077808850139824,
+          "activation_rate": 0.13077808850139824
+        }
+      },
+      "entropy": 2.0597432568389076,
+      "entropy_norm": 0.9905271273819916,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7
+        ],
+        "cold": [
+          4
+        ]
+      }
+    },
+    "15": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 2903,
+          "percentage": 11.938641223885508,
+          "activation_rate": 0.11938641223885507
+        },
+        "1": {
+          "count": 2674,
+          "percentage": 10.996874485935185,
+          "activation_rate": 0.10996874485935186
+        },
+        "2": {
+          "count": 2654,
+          "percentage": 10.914624115808522,
+          "activation_rate": 0.10914624115808522
+        },
+        "3": {
+          "count": 2165,
+          "percentage": 8.903602566211548,
+          "activation_rate": 0.08903602566211548
+        },
+        "4": {
+          "count": 3434,
+          "percentage": 14.122388550748477,
+          "activation_rate": 0.14122388550748477
+        },
+        "5": {
+          "count": 2932,
+          "percentage": 12.057904260569172,
+          "activation_rate": 0.12057904260569173
+        },
+        "6": {
+          "count": 3918,
+          "percentage": 16.112847507813786,
+          "activation_rate": 0.16112847507813785
+        },
+        "7": {
+          "count": 3636,
+          "percentage": 14.953117289027801,
+          "activation_rate": 0.149531172890278
+        }
+      },
+      "entropy": 2.063431141477506,
+      "entropy_norm": 0.9923006250084838,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": [
+          3
+        ]
+      }
+    },
+    "16": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 2543,
+          "percentage": 10.458134561605528,
+          "activation_rate": 0.10458134561605527
+        },
+        "1": {
+          "count": 3534,
+          "percentage": 14.533640401381806,
+          "activation_rate": 0.14533640401381806
+        },
+        "2": {
+          "count": 1597,
+          "percentage": 6.5676920546142465,
+          "activation_rate": 0.06567692054614246
+        },
+        "3": {
+          "count": 3783,
+          "percentage": 15.557657509458792,
+          "activation_rate": 0.15557657509458792
+        },
+        "4": {
+          "count": 2380,
+          "percentage": 9.787794045073204,
+          "activation_rate": 0.09787794045073203
+        },
+        "5": {
+          "count": 2992,
+          "percentage": 12.304655370949169,
+          "activation_rate": 0.12304655370949169
+        },
+        "6": {
+          "count": 2703,
+          "percentage": 11.116137522618851,
+          "activation_rate": 0.11116137522618852
+        },
+        "7": {
+          "count": 4784,
+          "percentage": 19.674288534298405,
+          "activation_rate": 0.19674288534298404
+        }
+      },
+      "entropy": 2.034090896592461,
+      "entropy_norm": 0.9781909497437764,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": [
+          2
+        ]
+      }
+    },
+    "17": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 2840,
+          "percentage": 11.679552557986511,
+          "activation_rate": 0.11679552557986511
+        },
+        "1": {
+          "count": 3123,
+          "percentage": 12.843395295278828,
+          "activation_rate": 0.12843395295278828
+        },
+        "2": {
+          "count": 3612,
+          "percentage": 14.8544168448758,
+          "activation_rate": 0.148544168448758
+        },
+        "3": {
+          "count": 2528,
+          "percentage": 10.396446784010529,
+          "activation_rate": 0.10396446784010528
+        },
+        "4": {
+          "count": 2445,
+          "percentage": 10.055107747984867,
+          "activation_rate": 0.10055107747984866
+        },
+        "5": {
+          "count": 3042,
+          "percentage": 12.510281296265832,
+          "activation_rate": 0.12510281296265832
+        },
+        "6": {
+          "count": 3564,
+          "percentage": 14.657015956571803,
+          "activation_rate": 0.14657015956571803
+        },
+        "7": {
+          "count": 3162,
+          "percentage": 13.003783517025827,
+          "activation_rate": 0.13003783517025827
+        }
+      },
+      "entropy": 2.0707241657132744,
+      "entropy_norm": 0.9958078283078258,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": []
+      }
+    },
+    "18": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3361,
+          "percentage": 13.82217469978615,
+          "activation_rate": 0.1382217469978615
+        },
+        "1": {
+          "count": 3170,
+          "percentage": 13.036683665076493,
+          "activation_rate": 0.13036683665076493
+        },
+        "2": {
+          "count": 3448,
+          "percentage": 14.179963809837146,
+          "activation_rate": 0.14179963809837146
+        },
+        "3": {
+          "count": 2937,
+          "percentage": 12.078466853100839,
+          "activation_rate": 0.12078466853100839
+        },
+        "4": {
+          "count": 3275,
+          "percentage": 13.468498108241485,
+          "activation_rate": 0.13468498108241486
+        },
+        "5": {
+          "count": 2842,
+          "percentage": 11.687777594999178,
+          "activation_rate": 0.11687777594999177
+        },
+        "6": {
+          "count": 2293,
+          "percentage": 9.430004935022207,
+          "activation_rate": 0.09430004935022207
+        },
+        "7": {
+          "count": 2990,
+          "percentage": 12.296430333936502,
+          "activation_rate": 0.12296430333936503
+        }
+      },
+      "entropy": 2.072723242045932,
+      "entropy_norm": 0.9967691808116537,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          7
+        ],
+        "cold": [
+          6
+        ]
+      }
+    },
+    "19": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3321,
+          "percentage": 13.657673959532818,
+          "activation_rate": 0.13657673959532818
+        },
+        "1": {
+          "count": 2099,
+          "percentage": 8.632176344793551,
+          "activation_rate": 0.08632176344793552
+        },
+        "2": {
+          "count": 3098,
+          "percentage": 12.740582332620498,
+          "activation_rate": 0.12740582332620498
+        },
+        "3": {
+          "count": 2118,
+          "percentage": 8.710314196413883,
+          "activation_rate": 0.08710314196413883
+        },
+        "4": {
+          "count": 3598,
+          "percentage": 14.796841585787135,
+          "activation_rate": 0.14796841585787135
+        },
+        "5": {
+          "count": 2884,
+          "percentage": 11.860503372265176,
+          "activation_rate": 0.11860503372265176
+        },
+        "6": {
+          "count": 4135,
+          "percentage": 17.005264023688106,
+          "activation_rate": 0.17005264023688108
+        },
+        "7": {
+          "count": 3063,
+          "percentage": 12.596644184898832,
+          "activation_rate": 0.1259664418489883
+        }
+      },
+      "entropy": 2.0562953075474,
+      "entropy_norm": 0.9888690142672933,
+      "classification": {
+        "hot": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": [
+          1
+        ]
+      }
+    },
+    "20": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3364,
+          "percentage": 13.834512255305148,
+          "activation_rate": 0.13834512255305148
+        },
+        "1": {
+          "count": 3710,
+          "percentage": 15.257443658496465,
+          "activation_rate": 0.15257443658496464
+        },
+        "2": {
+          "count": 3548,
+          "percentage": 14.591215660470471,
+          "activation_rate": 0.14591215660470472
+        },
+        "3": {
+          "count": 2788,
+          "percentage": 11.465701595657181,
+          "activation_rate": 0.11465701595657181
+        },
+        "4": {
+          "count": 1221,
+          "percentage": 5.021385096232933,
+          "activation_rate": 0.05021385096232933
+        },
+        "5": {
+          "count": 3366,
+          "percentage": 13.842737292317816,
+          "activation_rate": 0.13842737292317817
+        },
+        "6": {
+          "count": 2822,
+          "percentage": 11.605527224872512,
+          "activation_rate": 0.11605527224872512
+        },
+        "7": {
+          "count": 3497,
+          "percentage": 14.381477216647475,
+          "activation_rate": 0.14381477216647476
+        }
+      },
+      "entropy": 2.0424498770308195,
+      "entropy_norm": 0.9822107696188789,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7
+        ],
+        "cold": [
+          4
+        ]
+      }
+    },
+    "21": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3167,
+          "percentage": 13.024346109557495,
+          "activation_rate": 0.13024346109557494
+        },
+        "1": {
+          "count": 2617,
+          "percentage": 10.76246093107419,
+          "activation_rate": 0.1076246093107419
+        },
+        "2": {
+          "count": 3253,
+          "percentage": 13.378022701102154,
+          "activation_rate": 0.13378022701102155
+        },
+        "3": {
+          "count": 1941,
+          "percentage": 7.982398420792894,
+          "activation_rate": 0.07982398420792894
+        },
+        "4": {
+          "count": 3838,
+          "percentage": 15.783846027307122,
+          "activation_rate": 0.15783846027307122
+        },
+        "5": {
+          "count": 2414,
+          "percentage": 9.927619674288534,
+          "activation_rate": 0.09927619674288535
+        },
+        "6": {
+          "count": 4223,
+          "percentage": 17.367165652245433,
+          "activation_rate": 0.17367165652245434
+        },
+        "7": {
+          "count": 2863,
+          "percentage": 11.774140483632177,
+          "activation_rate": 0.11774140483632177
+        }
+      },
+      "entropy": 2.052903922819598,
+      "entropy_norm": 0.9872381029577779,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": [
+          3
+        ]
+      }
+    },
+    "22": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 4395,
+          "percentage": 18.07451883533476,
+          "activation_rate": 0.1807451883533476
+        },
+        "1": {
+          "count": 3653,
+          "percentage": 15.023030103635465,
+          "activation_rate": 0.15023030103635465
+        },
+        "2": {
+          "count": 2344,
+          "percentage": 9.639743378845205,
+          "activation_rate": 0.09639743378845204
+        },
+        "3": {
+          "count": 2743,
+          "percentage": 11.280638262872184,
+          "activation_rate": 0.11280638262872184
+        },
+        "4": {
+          "count": 3325,
+          "percentage": 13.674124033558153,
+          "activation_rate": 0.13674124033558152
+        },
+        "5": {
+          "count": 2727,
+          "percentage": 11.214837966770851,
+          "activation_rate": 0.1121483796677085
+        },
+        "6": {
+          "count": 2940,
+          "percentage": 12.090804408619839,
+          "activation_rate": 0.12090804408619839
+        },
+        "7": {
+          "count": 2189,
+          "percentage": 9.002303010363546,
+          "activation_rate": 0.09002303010363547
+        }
+      },
+      "entropy": 2.055257556051844,
+      "entropy_norm": 0.9883699612885221,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cold": [
+          7
+        ]
+      }
+    },
+    "23": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 2860,
+          "percentage": 11.761802928113177,
+          "activation_rate": 0.11761802928113177
+        },
+        "1": {
+          "count": 2653,
+          "percentage": 10.910511597302188,
+          "activation_rate": 0.10910511597302187
+        },
+        "2": {
+          "count": 2430,
+          "percentage": 9.993419970389866,
+          "activation_rate": 0.09993419970389866
+        },
+        "3": {
+          "count": 3159,
+          "percentage": 12.991445961506825,
+          "activation_rate": 0.12991445961506826
+        },
+        "4": {
+          "count": 3104,
+          "percentage": 12.765257443658495,
+          "activation_rate": 0.12765257443658495
+        },
+        "5": {
+          "count": 3948,
+          "percentage": 16.23622306300378,
+          "activation_rate": 0.16236223063003782
+        },
+        "6": {
+          "count": 3451,
+          "percentage": 14.192301365356144,
+          "activation_rate": 0.14192301365356144
+        },
+        "7": {
+          "count": 2711,
+          "percentage": 11.149037670669518,
+          "activation_rate": 0.11149037670669518
+        }
+      },
+      "entropy": 2.0683860457178613,
+      "entropy_norm": 0.9946834302670305,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": [
+          2
+        ]
+      }
+    },
+    "24": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 2742,
+          "percentage": 11.276525744365848,
+          "activation_rate": 0.11276525744365849
+        },
+        "1": {
+          "count": 1862,
+          "percentage": 7.657509458792565,
+          "activation_rate": 0.07657509458792565
+        },
+        "2": {
+          "count": 3104,
+          "percentage": 12.765257443658495,
+          "activation_rate": 0.12765257443658495
+        },
+        "3": {
+          "count": 3285,
+          "percentage": 13.50962329330482,
+          "activation_rate": 0.1350962329330482
+        },
+        "4": {
+          "count": 2882,
+          "percentage": 11.852278335252509,
+          "activation_rate": 0.11852278335252509
+        },
+        "5": {
+          "count": 3858,
+          "percentage": 15.866096397433788,
+          "activation_rate": 0.15866096397433788
+        },
+        "6": {
+          "count": 2805,
+          "percentage": 11.535614410264847,
+          "activation_rate": 0.11535614410264847
+        },
+        "7": {
+          "count": 3778,
+          "percentage": 15.537094916927128,
+          "activation_rate": 0.15537094916927127
+        }
+      },
+      "entropy": 2.0593492587238313,
+      "entropy_norm": 0.9903376543397449,
+      "classification": {
+        "hot": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": [
+          1
+        ]
+      }
+    },
+    "25": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3314,
+          "percentage": 13.628886329988484,
+          "activation_rate": 0.13628886329988485
+        },
+        "1": {
+          "count": 4234,
+          "percentage": 17.4124033558151,
+          "activation_rate": 0.174124033558151
+        },
+        "2": {
+          "count": 2554,
+          "percentage": 10.503372265175193,
+          "activation_rate": 0.10503372265175193
+        },
+        "3": {
+          "count": 3316,
+          "percentage": 13.63711136700115,
+          "activation_rate": 0.1363711136700115
+        },
+        "4": {
+          "count": 3047,
+          "percentage": 12.530843888797499,
+          "activation_rate": 0.125308438887975
+        },
+        "5": {
+          "count": 2932,
+          "percentage": 12.057904260569172,
+          "activation_rate": 0.12057904260569173
+        },
+        "6": {
+          "count": 2437,
+          "percentage": 10.0222075999342,
+          "activation_rate": 0.10022207599934199
+        },
+        "7": {
+          "count": 2482,
+          "percentage": 10.207270932719197,
+          "activation_rate": 0.10207270932719197
+        }
+      },
+      "entropy": 2.063206853187604,
+      "entropy_norm": 0.9921927651406268,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": []
+      }
+    },
+    "26": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 2907,
+          "percentage": 11.95509129791084,
+          "activation_rate": 0.1195509129791084
+        },
+        "1": {
+          "count": 3291,
+          "percentage": 13.53429840434282,
+          "activation_rate": 0.1353429840434282
+        },
+        "2": {
+          "count": 3889,
+          "percentage": 15.99358447113012,
+          "activation_rate": 0.1599358447113012
+        },
+        "3": {
+          "count": 3142,
+          "percentage": 12.921533146899161,
+          "activation_rate": 0.1292153314689916
+        },
+        "4": {
+          "count": 2361,
+          "percentage": 9.70965619345287,
+          "activation_rate": 0.0970965619345287
+        },
+        "5": {
+          "count": 3727,
+          "percentage": 15.327356473104128,
+          "activation_rate": 0.15327356473104128
+        },
+        "6": {
+          "count": 2579,
+          "percentage": 10.606185227833526,
+          "activation_rate": 0.10606185227833526
+        },
+        "7": {
+          "count": 2420,
+          "percentage": 9.952294785326533,
+          "activation_rate": 0.09952294785326533
+        }
+      },
+      "entropy": 2.0636893820616447,
+      "entropy_norm": 0.9924248124785148,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7
+        ],
+        "cold": [
+          4
+        ]
+      }
+    },
+    "27": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3397,
+          "percentage": 13.970225366014146,
+          "activation_rate": 0.13970225366014147
+        },
+        "1": {
+          "count": 2694,
+          "percentage": 11.079124856061853,
+          "activation_rate": 0.11079124856061852
+        },
+        "2": {
+          "count": 2880,
+          "percentage": 11.844053298239842,
+          "activation_rate": 0.11844053298239843
+        },
+        "3": {
+          "count": 2613,
+          "percentage": 10.746010857048857,
+          "activation_rate": 0.10746010857048857
+        },
+        "4": {
+          "count": 3840,
+          "percentage": 15.79207106431979,
+          "activation_rate": 0.1579207106431979
+        },
+        "5": {
+          "count": 3057,
+          "percentage": 12.571969073860833,
+          "activation_rate": 0.12571969073860834
+        },
+        "6": {
+          "count": 3109,
+          "percentage": 12.785820036190163,
+          "activation_rate": 0.12785820036190162
+        },
+        "7": {
+          "count": 2726,
+          "percentage": 11.210725448264517,
+          "activation_rate": 0.11210725448264518
+        }
+      },
+      "entropy": 2.071579774519322,
+      "entropy_norm": 0.9962192891683009,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": []
+      }
+    },
+    "28": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 2575,
+          "percentage": 10.589735153808192,
+          "activation_rate": 0.10589735153808193
+        },
+        "1": {
+          "count": 4427,
+          "percentage": 18.206119427537423,
+          "activation_rate": 0.18206119427537423
+        },
+        "2": {
+          "count": 3322,
+          "percentage": 13.66178647803915,
+          "activation_rate": 0.1366178647803915
+        },
+        "3": {
+          "count": 3286,
+          "percentage": 13.513735811811154,
+          "activation_rate": 0.13513735811811153
+        },
+        "4": {
+          "count": 3260,
+          "percentage": 13.406810330646488,
+          "activation_rate": 0.13406810330646488
+        },
+        "5": {
+          "count": 3115,
+          "percentage": 12.810495147228163,
+          "activation_rate": 0.12810495147228163
+        },
+        "6": {
+          "count": 2029,
+          "percentage": 8.344300049350222,
+          "activation_rate": 0.08344300049350221
+        },
+        "7": {
+          "count": 2302,
+          "percentage": 9.467017601579206,
+          "activation_rate": 0.09467017601579207
+        }
+      },
+      "entropy": 2.0533652775047946,
+      "entropy_norm": 0.9874599676632525,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          7
+        ],
+        "cold": [
+          6
+        ]
+      }
+    },
+    "29": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3145,
+          "percentage": 12.93387070241816,
+          "activation_rate": 0.1293387070241816
+        },
+        "1": {
+          "count": 3205,
+          "percentage": 13.180621812798158,
+          "activation_rate": 0.13180621812798157
+        },
+        "2": {
+          "count": 3039,
+          "percentage": 12.497943740746834,
+          "activation_rate": 0.12497943740746834
+        },
+        "3": {
+          "count": 3606,
+          "percentage": 14.829741733837803,
+          "activation_rate": 0.14829741733837803
+        },
+        "4": {
+          "count": 3167,
+          "percentage": 13.024346109557495,
+          "activation_rate": 0.13024346109557494
+        },
+        "5": {
+          "count": 2706,
+          "percentage": 11.128475078137852,
+          "activation_rate": 0.11128475078137852
+        },
+        "6": {
+          "count": 2820,
+          "percentage": 11.597302187859846,
+          "activation_rate": 0.11597302187859845
+        },
+        "7": {
+          "count": 2628,
+          "percentage": 10.807698634643856,
+          "activation_rate": 0.10807698634643856
+        }
+      },
+      "entropy": 2.0747123715673634,
+      "entropy_norm": 0.9977257499104053,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": []
+      }
+    },
+    "30": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 3095,
+          "percentage": 12.728244777101496,
+          "activation_rate": 0.12728244777101497
+        },
+        "1": {
+          "count": 2935,
+          "percentage": 12.070241816088172,
+          "activation_rate": 0.12070241816088173
+        },
+        "2": {
+          "count": 3044,
+          "percentage": 12.5185063332785,
+          "activation_rate": 0.125185063332785
+        },
+        "3": {
+          "count": 3450,
+          "percentage": 14.188188846849812,
+          "activation_rate": 0.1418818884684981
+        },
+        "4": {
+          "count": 3283,
+          "percentage": 13.501398256292152,
+          "activation_rate": 0.13501398256292152
+        },
+        "5": {
+          "count": 2836,
+          "percentage": 11.663102483961179,
+          "activation_rate": 0.11663102483961178
+        },
+        "6": {
+          "count": 2591,
+          "percentage": 10.655535449909523,
+          "activation_rate": 0.10655535449909524
+        },
+        "7": {
+          "count": 3082,
+          "percentage": 12.674782036519163,
+          "activation_rate": 0.12674782036519164
+        }
+      },
+      "entropy": 2.0761312879779603,
+      "entropy_norm": 0.99840810446674,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": []
+      }
+    },
+    "31": {
+      "total_tokens": 12158,
+      "expert_stats": {
+        "0": {
+          "count": 2921,
+          "percentage": 12.012666556999505,
+          "activation_rate": 0.12012666556999506
+        },
+        "1": {
+          "count": 2706,
+          "percentage": 11.128475078137852,
+          "activation_rate": 0.11128475078137852
+        },
+        "2": {
+          "count": 3162,
+          "percentage": 13.003783517025827,
+          "activation_rate": 0.13003783517025827
+        },
+        "3": {
+          "count": 3476,
+          "percentage": 14.295114328014478,
+          "activation_rate": 0.14295114328014477
+        },
+        "4": {
+          "count": 2581,
+          "percentage": 10.61441026484619,
+          "activation_rate": 0.10614410264846191
+        },
+        "5": {
+          "count": 3302,
+          "percentage": 13.579536107912485,
+          "activation_rate": 0.13579536107912485
+        },
+        "6": {
+          "count": 2810,
+          "percentage": 11.556177002796513,
+          "activation_rate": 0.11556177002796512
+        },
+        "7": {
+          "count": 3358,
+          "percentage": 13.809837144267147,
+          "activation_rate": 0.13809837144267148
+        }
+      },
+      "entropy": 2.0742501388835493,
+      "entropy_norm": 0.9975034629768468,
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cold": []
+      }
+    }
+  }
+}

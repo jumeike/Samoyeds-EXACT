@@ -1,0 +1,17 @@
+model,model_type,kernel_type,iter,batch_size,seq_len,hidden_size,intermediate_size,expert_num,time,atten_mode
+Mixtral,mlp,EXACT,100,1,4096,4096,14336,8,1645.91646194458,flash_attention_2
+Mixtral,mlp,Samoyeds,100,1,4096,4096,14336,8,1747.605562210083,flash_attention_2
+Mixtral,mlp,megablocks,100,1,4096,4096,14336,8,2720.4113006591797,flash_attention_2
+Mixtral,mlp,GEMM,100,1,4096,4096,14336,8,2037.4810695648193,flash_attention_2
+Mixtral,mlp,EXACT,100,1,4096,6144,16384,8,2361.89603805542,flash_attention_2
+Mixtral,mlp,Samoyeds,100,1,4096,6144,16384,8,2560.1115226745605,flash_attention_2
+Mixtral,mlp,megablocks,100,1,4096,6144,16384,8,5450.155973434448,flash_attention_2
+Mixtral,mlp,GEMM,100,1,4096,6144,16384,8,3106.2097549438477,flash_attention_2
+DeepSeek,mlp,EXACT,100,16,4096,2048,1408,64,7276.071786880493,flash_attention_2
+DeepSeek,mlp,Samoyeds,100,16,4096,2048,1408,64,7429.352283477783,flash_attention_2
+DeepSeek,mlp,megablocks,100,16,4096,2048,1408,64,6352.9953956604,flash_attention_2
+DeepSeek,mlp,GEMM,100,16,4096,2048,1408,64,8226.959228515625,flash_attention_2
+qwen2_moe,mlp,EXACT,100,14,4096,2048,5632,60,10987.582206726074,flash_attention_2
+qwen2_moe,mlp,Samoyeds,100,14,4096,2048,5632,60,11709.182024002075,flash_attention_2
+qwen2_moe,mlp,megablocks,100,14,4096,2048,5632,60,10845.746040344238,flash_attention_2
+qwen2_moe,mlp,GEMM,100,14,4096,2048,5632,60,13556.889772415161,flash_attention_2

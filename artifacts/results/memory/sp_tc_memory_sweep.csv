@@ -1,0 +1,16 @@
+model,policy,dense_gb,compressed_gb,compression_ratio_x,compressed_fraction_pct,saved_gb,saved_pct
+deepseek,mass0.7,27.844,12.407,2.244,44.6,15.437,55.4
+deepseek,mass0.8,27.844,13.249,2.102,47.6,14.595,52.4
+deepseek,mass0.9,27.844,14.24,1.955,51.1,13.604,48.9
+deepseek,uniform_all_hot,27.844,15.662,1.778,56.2,12.182,43.8
+deepseek,baseline_dense,27.844,27.844,1.0,100.0,0.0,0.0
+qwen,mass0.7,23.203,9.857,2.354,42.5,13.346,57.5
+qwen,mass0.8,23.203,10.546,2.2,45.5,12.657,54.5
+qwen,mass0.9,23.203,11.428,2.03,49.3,11.775,50.7
+qwen,uniform_all_hot,23.203,13.052,1.778,56.2,10.151,43.8
+qwen,baseline_dense,23.203,23.203,1.0,100.0,0.0,0.0
+mixtral,mass0.7,84.0,41.262,2.036,49.1,42.738,50.9
+mixtral,mass0.8,84.0,43.641,1.925,52.0,40.359,48.0
+mixtral,mass0.9,84.0,45.527,1.845,54.2,38.473,45.8
+mixtral,uniform_all_hot,84.0,47.25,1.778,56.2,36.75,43.8
+mixtral,baseline_dense,84.0,84.0,1.0,100.0,0.0,0.0

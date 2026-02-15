@@ -1,0 +1,18 @@
+model,model_type,kernel_type,iter,batch_size,seq_len,hidden_size,intermediate_size,expert_num,time,atten_mode
+Mixtral,layer,EXACT,100,1,4096,4096,14336,8,2034.1293811798096,flash_attention_2
+Mixtral,layer,Samoyeds,100,1,4096,4096,14336,8,2000.5476474761963,flash_attention_2
+Mixtral,layer,megablocks,100,1,4096,4096,14336,8,2311.2781047821045,flash_attention_2
+Mixtral,layer,GEMM,100,1,4096,4096,14336,8,2338.8314247131348,flash_attention_2
+Mixtral,layer,EXACT,100,1,4096,6144,16384,8,3535.9480381011963,flash_attention_2
+Mixtral,layer,Samoyeds,100,1,4096,6144,16384,8,3498.006582260132,flash_attention_2
+Mixtral,layer,megablocks,100,1,4096,6144,16384,8,4023.75864982605,flash_attention_2
+Mixtral,layer,GEMM,100,1,4096,6144,16384,8,3989.2332553863525,flash_attention_2
+DeepSeek,layer,EXACT,100,16,4096,2048,1408,64,11432.075500488281,flash_attention_2
+DeepSeek,layer,Samoyeds,100,16,4096,2048,1408,64,11650.008916854858,flash_attention_2
+DeepSeek,layer,megablocks,100,16,4096,2048,1408,64,10427.937030792236,flash_attention_2
+DeepSeek,layer,GEMM,100,16,4096,2048,1408,64,12613.247632980347,flash_attention_2
+qwen2_moe,layer,EXACT,100,14,4096,2048,5632,60,15217.655420303345,flash_attention_2
+Layer 0: Using MoE block (use_dense=False)
+qwen2_moe,layer,Samoyeds,100,14,4096,2048,5632,60,15593.746662139893,flash_attention_2
+qwen2_moe,layer,megablocks,100,14,4096,2048,5632,60,15215.155363082886,flash_attention_2
+qwen2_moe,layer,GEMM,100,14,4096,2048,5632,60,17828.055143356323,flash_attention_2

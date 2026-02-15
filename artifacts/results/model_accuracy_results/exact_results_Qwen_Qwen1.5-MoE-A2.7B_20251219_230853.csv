@@ -1,0 +1,2 @@
+task,baseline_acc,exact_acc,accuracy_drop
+openbookqa,44.2,28.799999999999997,15.400000000000002

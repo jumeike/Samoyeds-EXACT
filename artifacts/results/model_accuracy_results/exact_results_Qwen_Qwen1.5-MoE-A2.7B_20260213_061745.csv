@@ -1,0 +1,2 @@
+task,baseline_acc,exact_acc,accuracy_drop
+mmlu_astronomy,63.1578947368421,18.421052631578945,44.73684210526315

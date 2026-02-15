@@ -1,0 +1,2 @@
+samoyed_inference_peak_gpu_gb,samoyed_inference_delta_gpu_gb,samoyed_inference_final_cpu_rss_gb,overall_peak_gpu_gb,model,tasks,batch_size
+10.84087085723877,0.011962890625,88.11605834960938,10.84087085723877,Qwen/Qwen1.5-MoE-A2.7B,mmlu_astronomy,1

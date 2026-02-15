@@ -1,0 +1,1894 @@
+{
+  "num_experts": 8,
+  "num_layers": 32,
+  "layers": {
+    "0": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 80695,
+          "percentage": 10.99809463581376,
+          "activation_rate": 0.1099809463581376
+        },
+        "1": {
+          "count": 95974,
+          "percentage": 13.080502318329385,
+          "activation_rate": 0.13080502318329384
+        },
+        "2": {
+          "count": 99609,
+          "percentage": 13.5759242651809,
+          "activation_rate": 0.135759242651809
+        },
+        "3": {
+          "count": 92302,
+          "percentage": 12.580037562115146,
+          "activation_rate": 0.12580037562115146
+        },
+        "4": {
+          "count": 86519,
+          "percentage": 11.791860087935692,
+          "activation_rate": 0.11791860087935692
+        },
+        "5": {
+          "count": 117163,
+          "percentage": 15.968396577431657,
+          "activation_rate": 0.15968396577431657
+        },
+        "6": {
+          "count": 62688,
+          "percentage": 8.543881981905855,
+          "activation_rate": 0.08543881981905854
+        },
+        "7": {
+          "count": 98768,
+          "percentage": 13.461302571287606,
+          "activation_rate": 0.13461302571287606
+        }
+      },
+      "classification": {
+        "hot": [
+          1,
+          2,
+          3,
+          5,
+          7
+        ],
+        "cold": [
+          0,
+          4,
+          6
+        ]
+      }
+    },
+    "1": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 105391,
+          "percentage": 14.363965447215415,
+          "activation_rate": 0.14363965447215415
+        },
+        "1": {
+          "count": 81934,
+          "percentage": 11.166960603392583,
+          "activation_rate": 0.11166960603392584
+        },
+        "2": {
+          "count": 90755,
+          "percentage": 12.369193613895257,
+          "activation_rate": 0.12369193613895257
+        },
+        "3": {
+          "count": 88789,
+          "percentage": 12.101243256946129,
+          "activation_rate": 0.12101243256946129
+        },
+        "4": {
+          "count": 108766,
+          "percentage": 14.823951436382915,
+          "activation_rate": 0.14823951436382915
+        },
+        "5": {
+          "count": 96444,
+          "percentage": 13.144559626450489,
+          "activation_rate": 0.1314455962645049
+        },
+        "6": {
+          "count": 84569,
+          "percentage": 11.526090405305581,
+          "activation_rate": 0.11526090405305581
+        },
+        "7": {
+          "count": 77070,
+          "percentage": 10.50403561041163,
+          "activation_rate": 0.1050403561041163
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          4,
+          5
+        ],
+        "cold": [
+          1,
+          2,
+          3,
+          6,
+          7
+        ]
+      }
+    },
+    "2": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 111850,
+          "percentage": 15.244276411373306,
+          "activation_rate": 0.15244276411373306
+        },
+        "1": {
+          "count": 102029,
+          "percentage": 13.905751255932117,
+          "activation_rate": 0.13905751255932117
+        },
+        "2": {
+          "count": 87619,
+          "percentage": 11.941781447368061,
+          "activation_rate": 0.11941781447368062
+        },
+        "3": {
+          "count": 96698,
+          "percentage": 13.179177831264873,
+          "activation_rate": 0.13179177831264874
+        },
+        "4": {
+          "count": 88292,
+          "percentage": 12.033506060911686,
+          "activation_rate": 0.12033506060911685
+        },
+        "5": {
+          "count": 94429,
+          "percentage": 12.869930954399376,
+          "activation_rate": 0.12869930954399375
+        },
+        "6": {
+          "count": 92211,
+          "percentage": 12.56763497692574,
+          "activation_rate": 0.1256763497692574
+        },
+        "7": {
+          "count": 60590,
+          "percentage": 8.257941061824843,
+          "activation_rate": 0.08257941061824843
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          1,
+          3,
+          5,
+          6
+        ],
+        "cold": [
+          2,
+          4,
+          7
+        ]
+      }
+    },
+    "3": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 90267,
+          "percentage": 12.30268304716526,
+          "activation_rate": 0.1230268304716526
+        },
+        "1": {
+          "count": 80034,
+          "percentage": 10.908005528009399,
+          "activation_rate": 0.10908005528009398
+        },
+        "2": {
+          "count": 97442,
+          "percentage": 13.280579187099132,
+          "activation_rate": 0.1328057918709913
+        },
+        "3": {
+          "count": 89401,
+          "percentage": 12.184654049648502,
+          "activation_rate": 0.12184654049648502
+        },
+        "4": {
+          "count": 88242,
+          "percentage": 12.026691453664759,
+          "activation_rate": 0.12026691453664759
+        },
+        "5": {
+          "count": 100704,
+          "percentage": 13.725164163888579,
+          "activation_rate": 0.13725164163888579
+        },
+        "6": {
+          "count": 98143,
+          "percentage": 13.376119980701032,
+          "activation_rate": 0.13376119980701032
+        },
+        "7": {
+          "count": 89485,
+          "percentage": 12.196102589823338,
+          "activation_rate": 0.12196102589823338
+        }
+      },
+      "classification": {
+        "hot": [
+          2,
+          5,
+          6
+        ],
+        "cold": [
+          0,
+          1,
+          3,
+          4,
+          7
+        ]
+      }
+    },
+    "4": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 90342,
+          "percentage": 12.312904958035649,
+          "activation_rate": 0.12312904958035649
+        },
+        "1": {
+          "count": 83552,
+          "percentage": 11.387481293903107,
+          "activation_rate": 0.11387481293903107
+        },
+        "2": {
+          "count": 92581,
+          "percentage": 12.618063070552992,
+          "activation_rate": 0.12618063070552993
+        },
+        "3": {
+          "count": 104260,
+          "percentage": 14.20981903128995,
+          "activation_rate": 0.1420981903128995
+        },
+        "4": {
+          "count": 86197,
+          "percentage": 11.74797401726549,
+          "activation_rate": 0.11747974017265489
+        },
+        "5": {
+          "count": 84073,
+          "percentage": 11.458489501416075,
+          "activation_rate": 0.11458489501416075
+        },
+        "6": {
+          "count": 93372,
+          "percentage": 12.72587015719936,
+          "activation_rate": 0.1272587015719936
+        },
+        "7": {
+          "count": 99341,
+          "percentage": 13.539397970337378,
+          "activation_rate": 0.13539397970337377
+        }
+      },
+      "classification": {
+        "hot": [
+          2,
+          3,
+          6,
+          7
+        ],
+        "cold": [
+          0,
+          1,
+          4,
+          5
+        ]
+      }
+    },
+    "5": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 94636,
+          "percentage": 12.898143428401648,
+          "activation_rate": 0.12898143428401648
+        },
+        "1": {
+          "count": 112191,
+          "percentage": 15.290752032797341,
+          "activation_rate": 0.15290752032797342
+        },
+        "2": {
+          "count": 93299,
+          "percentage": 12.715920830618849,
+          "activation_rate": 0.1271592083061885
+        },
+        "3": {
+          "count": 84487,
+          "percentage": 11.514914449420623,
+          "activation_rate": 0.11514914449420623
+        },
+        "4": {
+          "count": 85103,
+          "percentage": 11.59887041070275,
+          "activation_rate": 0.1159887041070275
+        },
+        "5": {
+          "count": 90460,
+          "percentage": 12.328987431138394,
+          "activation_rate": 0.12328987431138394
+        },
+        "6": {
+          "count": 88468,
+          "percentage": 12.057493478420865,
+          "activation_rate": 0.12057493478420865
+        },
+        "7": {
+          "count": 85074,
+          "percentage": 11.594917938499533,
+          "activation_rate": 0.11594917938499533
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2
+        ],
+        "cold": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    "6": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 104027,
+          "percentage": 14.178062961519275,
+          "activation_rate": 0.14178062961519275
+        },
+        "1": {
+          "count": 97626,
+          "percentage": 13.305656941767818,
+          "activation_rate": 0.13305656941767818
+        },
+        "2": {
+          "count": 92681,
+          "percentage": 12.631692285046844,
+          "activation_rate": 0.12631692285046844
+        },
+        "3": {
+          "count": 93761,
+          "percentage": 12.778887801580444,
+          "activation_rate": 0.12778887801580444
+        },
+        "4": {
+          "count": 63765,
+          "percentage": 8.69066862200464,
+          "activation_rate": 0.0869066862200464
+        },
+        "5": {
+          "count": 97311,
+          "percentage": 13.262724916112184,
+          "activation_rate": 0.13262724916112184
+        },
+        "6": {
+          "count": 83730,
+          "percentage": 11.411741295702162,
+          "activation_rate": 0.11411741295702163
+        },
+        "7": {
+          "count": 100817,
+          "percentage": 13.740565176266632,
+          "activation_rate": 0.1374056517626663
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          7
+        ],
+        "cold": [
+          4,
+          6
+        ]
+      }
+    },
+    "7": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 97855,
+          "percentage": 13.336867842958739,
+          "activation_rate": 0.13336867842958738
+        },
+        "1": {
+          "count": 91088,
+          "percentage": 12.414578898159784,
+          "activation_rate": 0.12414578898159784
+        },
+        "2": {
+          "count": 89952,
+          "percentage": 12.259751021509627,
+          "activation_rate": 0.12259751021509627
+        },
+        "3": {
+          "count": 73828,
+          "percentage": 10.062176476520952,
+          "activation_rate": 0.10062176476520952
+        },
+        "4": {
+          "count": 81704,
+          "percentage": 11.135613410056724,
+          "activation_rate": 0.11135613410056724
+        },
+        "5": {
+          "count": 105287,
+          "percentage": 14.34979106414181,
+          "activation_rate": 0.1434979106414181
+        },
+        "6": {
+          "count": 88231,
+          "percentage": 12.025192240070435,
+          "activation_rate": 0.12025192240070436
+        },
+        "7": {
+          "count": 105773,
+          "percentage": 14.41602904658193,
+          "activation_rate": 0.1441602904658193
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          5,
+          7
+        ],
+        "cold": [
+          1,
+          2,
+          3,
+          4,
+          6
+        ]
+      }
+    },
+    "8": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 93277,
+          "percentage": 12.712922403430202,
+          "activation_rate": 0.12712922403430202
+        },
+        "1": {
+          "count": 104871,
+          "percentage": 14.293093531847386,
+          "activation_rate": 0.14293093531847387
+        },
+        "2": {
+          "count": 74464,
+          "percentage": 10.14885828070185,
+          "activation_rate": 0.1014885828070185
+        },
+        "3": {
+          "count": 83868,
+          "percentage": 11.430549611703679,
+          "activation_rate": 0.11430549611703679
+        },
+        "4": {
+          "count": 81662,
+          "percentage": 11.129889139969308,
+          "activation_rate": 0.11129889139969307
+        },
+        "5": {
+          "count": 101645,
+          "percentage": 13.853415072275723,
+          "activation_rate": 0.13853415072275724
+        },
+        "6": {
+          "count": 96592,
+          "percentage": 13.164730863901388,
+          "activation_rate": 0.1316473086390139
+        },
+        "7": {
+          "count": 97339,
+          "percentage": 13.266541096170464,
+          "activation_rate": 0.13266541096170464
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          1,
+          5,
+          6,
+          7
+        ],
+        "cold": [
+          2,
+          3,
+          4
+        ]
+      }
+    },
+    "9": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 100249,
+          "percentage": 13.663151237941554,
+          "activation_rate": 0.13663151237941554
+        },
+        "1": {
+          "count": 88337,
+          "percentage": 12.03963920743392,
+          "activation_rate": 0.12039639207433919
+        },
+        "2": {
+          "count": 84715,
+          "percentage": 11.545989058466605,
+          "activation_rate": 0.11545989058466605
+        },
+        "3": {
+          "count": 101846,
+          "percentage": 13.880809793408366,
+          "activation_rate": 0.13880809793408366
+        },
+        "4": {
+          "count": 84934,
+          "percentage": 11.575837038208139,
+          "activation_rate": 0.1157583703820814
+        },
+        "5": {
+          "count": 88270,
+          "percentage": 12.030507633723039,
+          "activation_rate": 0.12030507633723038
+        },
+        "6": {
+          "count": 92607,
+          "percentage": 12.621606666321394,
+          "activation_rate": 0.12621606666321394
+        },
+        "7": {
+          "count": 92760,
+          "percentage": 12.642459364496986,
+          "activation_rate": 0.12642459364496986
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          3,
+          6,
+          7
+        ],
+        "cold": [
+          1,
+          2,
+          4,
+          5
+        ]
+      }
+    },
+    "10": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 102082,
+          "percentage": 13.912974739613857,
+          "activation_rate": 0.13912974739613856
+        },
+        "1": {
+          "count": 101132,
+          "percentage": 13.783497201922264,
+          "activation_rate": 0.13783497201922265
+        },
+        "2": {
+          "count": 107190,
+          "percentage": 14.60915501595981,
+          "activation_rate": 0.1460915501595981
+        },
+        "3": {
+          "count": 93470,
+          "percentage": 12.739226787403336,
+          "activation_rate": 0.12739226787403335
+        },
+        "4": {
+          "count": 93131,
+          "percentage": 12.693023750269179,
+          "activation_rate": 0.12693023750269178
+        },
+        "5": {
+          "count": 80042,
+          "percentage": 10.909095865168906,
+          "activation_rate": 0.10909095865168907
+        },
+        "6": {
+          "count": 55048,
+          "percentage": 7.502609994575573,
+          "activation_rate": 0.07502609994575572
+        },
+        "7": {
+          "count": 101623,
+          "percentage": 13.850416645087076,
+          "activation_rate": 0.13850416645087077
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          7
+        ],
+        "cold": [
+          5,
+          6
+        ]
+      }
+    },
+    "11": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 97669,
+          "percentage": 13.311517504000175,
+          "activation_rate": 0.13311517504000175
+        },
+        "1": {
+          "count": 103911,
+          "percentage": 14.162253072706408,
+          "activation_rate": 0.14162253072706407
+        },
+        "2": {
+          "count": 118397,
+          "percentage": 16.13658108428579,
+          "activation_rate": 0.1613658108428579
+        },
+        "3": {
+          "count": 30024,
+          "percentage": 4.0920353596340835,
+          "activation_rate": 0.04092035359634083
+        },
+        "4": {
+          "count": 91101,
+          "percentage": 12.416350696043985,
+          "activation_rate": 0.12416350696043985
+        },
+        "5": {
+          "count": 102854,
+          "percentage": 14.018192275506394,
+          "activation_rate": 0.14018192275506394
+        },
+        "6": {
+          "count": 98823,
+          "percentage": 13.468798639259225,
+          "activation_rate": 0.13468798639259225
+        },
+        "7": {
+          "count": 90939,
+          "percentage": 12.394271368563944,
+          "activation_rate": 0.12394271368563944
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          5,
+          6
+        ],
+        "cold": [
+          3,
+          4,
+          7
+        ]
+      }
+    },
+    "12": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 105931,
+          "percentage": 14.437563205482215,
+          "activation_rate": 0.14437563205482215
+        },
+        "1": {
+          "count": 113981,
+          "percentage": 15.53471497223729,
+          "activation_rate": 0.1553471497223729
+        },
+        "2": {
+          "count": 107827,
+          "percentage": 14.695973112285646,
+          "activation_rate": 0.14695973112285646
+        },
+        "3": {
+          "count": 110984,
+          "percentage": 15.12624741385655,
+          "activation_rate": 0.1512624741385655
+        },
+        "4": {
+          "count": 88600,
+          "percentage": 12.075484041552748,
+          "activation_rate": 0.12075484041552749
+        },
+        "5": {
+          "count": 87899,
+          "percentage": 11.979943247950848,
+          "activation_rate": 0.11979943247950847
+        },
+        "6": {
+          "count": 91841,
+          "percentage": 12.517206883298487,
+          "activation_rate": 0.12517206883298487
+        },
+        "7": {
+          "count": 26655,
+          "percentage": 3.6328671233362133,
+          "activation_rate": 0.036328671233362135
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          3,
+          6
+        ],
+        "cold": [
+          4,
+          5,
+          7
+        ]
+      }
+    },
+    "13": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 97910,
+          "percentage": 13.344363910930356,
+          "activation_rate": 0.13344363910930357
+        },
+        "1": {
+          "count": 95959,
+          "percentage": 13.078457936155308,
+          "activation_rate": 0.13078457936155308
+        },
+        "2": {
+          "count": 84845,
+          "percentage": 11.56370703730861,
+          "activation_rate": 0.11563707037308611
+        },
+        "3": {
+          "count": 96579,
+          "percentage": 13.162959066017187,
+          "activation_rate": 0.13162959066017188
+        },
+        "4": {
+          "count": 86713,
+          "percentage": 11.818300764053765,
+          "activation_rate": 0.11818300764053764
+        },
+        "5": {
+          "count": 86775,
+          "percentage": 11.826750877039952,
+          "activation_rate": 0.11826750877039953
+        },
+        "6": {
+          "count": 97572,
+          "percentage": 13.29829716594114,
+          "activation_rate": 0.1329829716594114
+        },
+        "7": {
+          "count": 87365,
+          "percentage": 11.907163242553679,
+          "activation_rate": 0.11907163242553678
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          1,
+          3,
+          6
+        ],
+        "cold": [
+          2,
+          4,
+          5,
+          7
+        ]
+      }
+    },
+    "14": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 88695,
+          "percentage": 12.088431795321908,
+          "activation_rate": 0.12088431795321908
+        },
+        "1": {
+          "count": 88330,
+          "percentage": 12.038685162419348,
+          "activation_rate": 0.12038685162419349
+        },
+        "2": {
+          "count": 62870,
+          "percentage": 8.568687152284665,
+          "activation_rate": 0.08568687152284665
+        },
+        "3": {
+          "count": 97137,
+          "percentage": 13.239010082892882,
+          "activation_rate": 0.13239010082892883
+        },
+        "4": {
+          "count": 101848,
+          "percentage": 13.881082377698245,
+          "activation_rate": 0.13881082377698245
+        },
+        "5": {
+          "count": 100360,
+          "percentage": 13.678279666029727,
+          "activation_rate": 0.13678279666029727
+        },
+        "6": {
+          "count": 106133,
+          "percentage": 14.465094218759797,
+          "activation_rate": 0.14465094218759797
+        },
+        "7": {
+          "count": 88345,
+          "percentage": 12.040729544593427,
+          "activation_rate": 0.12040729544593427
+        }
+      },
+      "classification": {
+        "hot": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "cold": [
+          0,
+          1,
+          2,
+          7
+        ]
+      }
+    },
+    "15": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 96902,
+          "percentage": 13.206981428832332,
+          "activation_rate": 0.13206981428832332
+        },
+        "1": {
+          "count": 109213,
+          "percentage": 14.884874025170433,
+          "activation_rate": 0.14884874025170433
+        },
+        "2": {
+          "count": 95720,
+          "percentage": 13.045884113515003,
+          "activation_rate": 0.13045884113515002
+        },
+        "3": {
+          "count": 51995,
+          "percentage": 7.086510076078276,
+          "activation_rate": 0.07086510076078276
+        },
+        "4": {
+          "count": 90275,
+          "percentage": 12.303773384324767,
+          "activation_rate": 0.12303773384324768
+        },
+        "5": {
+          "count": 96653,
+          "percentage": 13.17304468474264,
+          "activation_rate": 0.1317304468474264
+        },
+        "6": {
+          "count": 94308,
+          "percentage": 12.853439604861814,
+          "activation_rate": 0.12853439604861813
+        },
+        "7": {
+          "count": 98652,
+          "percentage": 13.445492682474738,
+          "activation_rate": 0.13445492682474738
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          5,
+          6,
+          7
+        ],
+        "cold": [
+          3,
+          4
+        ]
+      }
+    },
+    "16": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 93413,
+          "percentage": 12.73145813514184,
+          "activation_rate": 0.1273145813514184
+        },
+        "1": {
+          "count": 98534,
+          "percentage": 13.429410209371992,
+          "activation_rate": 0.13429410209371992
+        },
+        "2": {
+          "count": 84767,
+          "percentage": 11.553076250003407,
+          "activation_rate": 0.11553076250003408
+        },
+        "3": {
+          "count": 93236,
+          "percentage": 12.707334425487721,
+          "activation_rate": 0.1270733442548772
+        },
+        "4": {
+          "count": 89869,
+          "percentage": 12.248438773479728,
+          "activation_rate": 0.12248438773479729
+        },
+        "5": {
+          "count": 83672,
+          "percentage": 11.403836351295729,
+          "activation_rate": 0.11403836351295729
+        },
+        "6": {
+          "count": 88149,
+          "percentage": 12.014016284185477,
+          "activation_rate": 0.12014016284185478
+        },
+        "7": {
+          "count": 102078,
+          "percentage": 13.912429571034101,
+          "activation_rate": 0.13912429571034102
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          1,
+          3,
+          7
+        ],
+        "cold": [
+          2,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    "17": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 90032,
+          "percentage": 12.270654393104707,
+          "activation_rate": 0.12270654393104707
+        },
+        "1": {
+          "count": 90968,
+          "percentage": 12.39822384076716,
+          "activation_rate": 0.12398223840767161
+        },
+        "2": {
+          "count": 98568,
+          "percentage": 13.434044142299904,
+          "activation_rate": 0.13434044142299903
+        },
+        "3": {
+          "count": 84995,
+          "percentage": 11.58415085904939,
+          "activation_rate": 0.1158415085904939
+        },
+        "4": {
+          "count": 80529,
+          "percentage": 10.975470139753964,
+          "activation_rate": 0.10975470139753965
+        },
+        "5": {
+          "count": 97730,
+          "percentage": 13.319831324841424,
+          "activation_rate": 0.13319831324841425
+        },
+        "6": {
+          "count": 88323,
+          "percentage": 12.037731117404778,
+          "activation_rate": 0.12037731117404779
+        },
+        "7": {
+          "count": 102573,
+          "percentage": 13.97989418277867,
+          "activation_rate": 0.1397989418277867
+        }
+      },
+      "classification": {
+        "hot": [
+          2,
+          5,
+          7
+        ],
+        "cold": [
+          0,
+          1,
+          3,
+          4,
+          6
+        ]
+      }
+    },
+    "18": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 93278,
+          "percentage": 12.713058695575139,
+          "activation_rate": 0.12713058695575138
+        },
+        "1": {
+          "count": 97050,
+          "percentage": 13.227152666283231,
+          "activation_rate": 0.13227152666283232
+        },
+        "2": {
+          "count": 95608,
+          "percentage": 13.030619393281887,
+          "activation_rate": 0.13030619393281886
+        },
+        "3": {
+          "count": 87343,
+          "percentage": 11.904164815365032,
+          "activation_rate": 0.11904164815365031
+        },
+        "4": {
+          "count": 94000,
+          "percentage": 12.81146162422075,
+          "activation_rate": 0.1281146162422075
+        },
+        "5": {
+          "count": 88763,
+          "percentage": 12.097699661177726,
+          "activation_rate": 0.12097699661177727
+        },
+        "6": {
+          "count": 83059,
+          "percentage": 11.320289266448418,
+          "activation_rate": 0.11320289266448418
+        },
+        "7": {
+          "count": 94617,
+          "percentage": 12.895553877647817,
+          "activation_rate": 0.12895553877647817
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          4,
+          7
+        ],
+        "cold": [
+          3,
+          5,
+          6
+        ]
+      }
+    },
+    "19": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 101739,
+          "percentage": 13.866226533899944,
+          "activation_rate": 0.13866226533899945
+        },
+        "1": {
+          "count": 90877,
+          "percentage": 12.385821255577756,
+          "activation_rate": 0.12385821255577756
+        },
+        "2": {
+          "count": 94287,
+          "percentage": 12.850577469818106,
+          "activation_rate": 0.12850577469818106
+        },
+        "3": {
+          "count": 86090,
+          "percentage": 11.733390757757068,
+          "activation_rate": 0.11733390757757067
+        },
+        "4": {
+          "count": 89252,
+          "percentage": 12.164346520052662,
+          "activation_rate": 0.12164346520052663
+        },
+        "5": {
+          "count": 92214,
+          "percentage": 12.568043853360555,
+          "activation_rate": 0.12568043853360555
+        },
+        "6": {
+          "count": 92721,
+          "percentage": 12.637143970844383,
+          "activation_rate": 0.12637143970844383
+        },
+        "7": {
+          "count": 86538,
+          "percentage": 11.794449638689523,
+          "activation_rate": 0.11794449638689523
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          2,
+          5,
+          6
+        ],
+        "cold": [
+          1,
+          3,
+          4,
+          7
+        ]
+      }
+    },
+    "20": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 75258,
+          "percentage": 10.257074243783034,
+          "activation_rate": 0.10257074243783033
+        },
+        "1": {
+          "count": 83349,
+          "percentage": 11.359813988480589,
+          "activation_rate": 0.11359813988480588
+        },
+        "2": {
+          "count": 92848,
+          "percentage": 12.654453073251576,
+          "activation_rate": 0.12654453073251576
+        },
+        "3": {
+          "count": 84676,
+          "percentage": 11.540673664814003,
+          "activation_rate": 0.11540673664814002
+        },
+        "4": {
+          "count": 93814,
+          "percentage": 12.786111285262185,
+          "activation_rate": 0.12786111285262186
+        },
+        "5": {
+          "count": 97727,
+          "percentage": 13.319422448406609,
+          "activation_rate": 0.1331942244840661
+        },
+        "6": {
+          "count": 117357,
+          "percentage": 15.99483725354973,
+          "activation_rate": 0.1599483725354973
+        },
+        "7": {
+          "count": 88689,
+          "percentage": 12.087614042452277,
+          "activation_rate": 0.12087614042452277
+        }
+      },
+      "classification": {
+        "hot": [
+          2,
+          4,
+          5,
+          6
+        ],
+        "cold": [
+          0,
+          1,
+          3,
+          7
+        ]
+      }
+    },
+    "21": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 93153,
+          "percentage": 12.696022177457825,
+          "activation_rate": 0.12696022177457825
+        },
+        "1": {
+          "count": 87752,
+          "percentage": 11.959908302644886,
+          "activation_rate": 0.11959908302644885
+        },
+        "2": {
+          "count": 97476,
+          "percentage": 13.28521312002704,
+          "activation_rate": 0.1328521312002704
+        },
+        "3": {
+          "count": 97553,
+          "percentage": 13.295707615187306,
+          "activation_rate": 0.13295707615187305
+        },
+        "4": {
+          "count": 79742,
+          "percentage": 10.868208221687352,
+          "activation_rate": 0.10868208221687352
+        },
+        "5": {
+          "count": 79530,
+          "percentage": 10.839314286960386,
+          "activation_rate": 0.10839314286960386
+        },
+        "6": {
+          "count": 100695,
+          "percentage": 13.723937534584133,
+          "activation_rate": 0.13723937534584132
+        },
+        "7": {
+          "count": 97817,
+          "percentage": 13.331688741451075,
+          "activation_rate": 0.13331688741451075
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          2,
+          3,
+          6,
+          7
+        ],
+        "cold": [
+          1,
+          4,
+          5
+        ]
+      }
+    },
+    "22": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 93481,
+          "percentage": 12.74072600099766,
+          "activation_rate": 0.1274072600099766
+        },
+        "1": {
+          "count": 87647,
+          "percentage": 11.945597627426341,
+          "activation_rate": 0.11945597627426341
+        },
+        "2": {
+          "count": 90838,
+          "percentage": 12.380505861925153,
+          "activation_rate": 0.12380505861925153
+        },
+        "3": {
+          "count": 100395,
+          "percentage": 13.683049891102575,
+          "activation_rate": 0.13683049891102575
+        },
+        "4": {
+          "count": 92176,
+          "percentage": 12.562864751852892,
+          "activation_rate": 0.12562864751852892
+        },
+        "5": {
+          "count": 84551,
+          "percentage": 11.523637146696688,
+          "activation_rate": 0.11523637146696687
+        },
+        "6": {
+          "count": 95580,
+          "percentage": 13.026803213223609,
+          "activation_rate": 0.1302680321322361
+        },
+        "7": {
+          "count": 89050,
+          "percentage": 12.136815506775083,
+          "activation_rate": 0.12136815506775082
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          3,
+          4,
+          6
+        ],
+        "cold": [
+          1,
+          2,
+          5,
+          7
+        ]
+      }
+    },
+    "23": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 99718,
+          "percentage": 13.5907801089792,
+          "activation_rate": 0.135907801089792
+        },
+        "1": {
+          "count": 108972,
+          "percentage": 14.852027618240252,
+          "activation_rate": 0.14852027618240252
+        },
+        "2": {
+          "count": 89190,
+          "percentage": 12.155896407066475,
+          "activation_rate": 0.12155896407066476
+        },
+        "3": {
+          "count": 91984,
+          "percentage": 12.536696660024695,
+          "activation_rate": 0.12536696660024696
+        },
+        "4": {
+          "count": 83192,
+          "percentage": 11.33841612172524,
+          "activation_rate": 0.11338416121725241
+        },
+        "5": {
+          "count": 72725,
+          "percentage": 9.911846240653766,
+          "activation_rate": 0.09911846240653766
+        },
+        "6": {
+          "count": 96556,
+          "percentage": 13.159824346683605,
+          "activation_rate": 0.13159824346683605
+        },
+        "7": {
+          "count": 91381,
+          "percentage": 12.45451249662677,
+          "activation_rate": 0.1245451249662677
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          1,
+          3,
+          6
+        ],
+        "cold": [
+          2,
+          4,
+          5,
+          7
+        ]
+      }
+    },
+    "24": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 82911,
+          "percentage": 11.300118028997517,
+          "activation_rate": 0.11300118028997516
+        },
+        "1": {
+          "count": 94035,
+          "percentage": 12.816231849293597,
+          "activation_rate": 0.12816231849293597
+        },
+        "2": {
+          "count": 109701,
+          "percentage": 14.95138459190043,
+          "activation_rate": 0.1495138459190043
+        },
+        "3": {
+          "count": 84799,
+          "percentage": 11.55743759864144,
+          "activation_rate": 0.1155743759864144
+        },
+        "4": {
+          "count": 90222,
+          "percentage": 12.296549900643026,
+          "activation_rate": 0.12296549900643026
+        },
+        "5": {
+          "count": 92631,
+          "percentage": 12.624877677799917,
+          "activation_rate": 0.12624877677799917
+        },
+        "6": {
+          "count": 88627,
+          "percentage": 12.07916392946609,
+          "activation_rate": 0.12079163929466089
+        },
+        "7": {
+          "count": 90792,
+          "percentage": 12.374236423257983,
+          "activation_rate": 0.12374236423257982
+        }
+      },
+      "classification": {
+        "hot": [
+          1,
+          2,
+          5
+        ],
+        "cold": [
+          0,
+          3,
+          4,
+          6,
+          7
+        ]
+      }
+    },
+    "25": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 92616,
+          "percentage": 12.62283329562584,
+          "activation_rate": 0.1262283329562584
+        },
+        "1": {
+          "count": 97639,
+          "percentage": 13.30742873965202,
+          "activation_rate": 0.1330742873965202
+        },
+        "2": {
+          "count": 89834,
+          "percentage": 12.243668548406882,
+          "activation_rate": 0.12243668548406882
+        },
+        "3": {
+          "count": 89506,
+          "percentage": 12.198964724867047,
+          "activation_rate": 0.12198964724867047
+        },
+        "4": {
+          "count": 94941,
+          "percentage": 12.939712532607894,
+          "activation_rate": 0.12939712532607894
+        },
+        "5": {
+          "count": 84626,
+          "percentage": 11.533859057567076,
+          "activation_rate": 0.11533859057567077
+        },
+        "6": {
+          "count": 95338,
+          "percentage": 12.993820514148489,
+          "activation_rate": 0.12993820514148488
+        },
+        "7": {
+          "count": 89218,
+          "percentage": 12.159712587124753,
+          "activation_rate": 0.12159712587124753
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          1,
+          4,
+          6
+        ],
+        "cold": [
+          2,
+          3,
+          5,
+          7
+        ]
+      }
+    },
+    "26": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 96780,
+          "percentage": 13.19035378714983,
+          "activation_rate": 0.1319035378714983
+        },
+        "1": {
+          "count": 88913,
+          "percentage": 12.118143482918505,
+          "activation_rate": 0.12118143482918506
+        },
+        "2": {
+          "count": 102526,
+          "percentage": 13.97348845196656,
+          "activation_rate": 0.1397348845196656
+        },
+        "3": {
+          "count": 102671,
+          "percentage": 13.993250812982645,
+          "activation_rate": 0.13993250812982644
+        },
+        "4": {
+          "count": 87501,
+          "percentage": 11.925698974265316,
+          "activation_rate": 0.11925698974265317
+        },
+        "5": {
+          "count": 83527,
+          "percentage": 11.384073990279644,
+          "activation_rate": 0.11384073990279645
+        },
+        "6": {
+          "count": 90358,
+          "percentage": 12.315085632354664,
+          "activation_rate": 0.12315085632354665
+        },
+        "7": {
+          "count": 81442,
+          "percentage": 11.099904868082833,
+          "activation_rate": 0.11099904868082833
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          2,
+          3
+        ],
+        "cold": [
+          1,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    "27": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 93052,
+          "percentage": 12.682256670819033,
+          "activation_rate": 0.12682256670819034
+        },
+        "1": {
+          "count": 94687,
+          "percentage": 12.905094327793512,
+          "activation_rate": 0.12905094327793512
+        },
+        "2": {
+          "count": 93782,
+          "percentage": 12.781749936624154,
+          "activation_rate": 0.12781749936624154
+        },
+        "3": {
+          "count": 91468,
+          "percentage": 12.46636991323642,
+          "activation_rate": 0.1246636991323642
+        },
+        "4": {
+          "count": 87611,
+          "percentage": 11.940691110208554,
+          "activation_rate": 0.11940691110208554
+        },
+        "5": {
+          "count": 90607,
+          "percentage": 12.349022376444356,
+          "activation_rate": 0.12349022376444356
+        },
+        "6": {
+          "count": 85711,
+          "percentage": 11.681736034825368,
+          "activation_rate": 0.11681736034825368
+        },
+        "7": {
+          "count": 96800,
+          "percentage": 13.1930796300486,
+          "activation_rate": 0.13193079630048601
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          1,
+          2,
+          7
+        ],
+        "cold": [
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    "28": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 93164,
+          "percentage": 12.697521391052147,
+          "activation_rate": 0.12697521391052147
+        },
+        "1": {
+          "count": 89495,
+          "percentage": 12.197465511272723,
+          "activation_rate": 0.12197465511272723
+        },
+        "2": {
+          "count": 96789,
+          "percentage": 13.19158041645428,
+          "activation_rate": 0.1319158041645428
+        },
+        "3": {
+          "count": 102680,
+          "percentage": 13.99447744228709,
+          "activation_rate": 0.1399447744228709
+        },
+        "4": {
+          "count": 91923,
+          "percentage": 12.528382839183447,
+          "activation_rate": 0.12528382839183447
+        },
+        "5": {
+          "count": 87658,
+          "percentage": 11.947096841020665,
+          "activation_rate": 0.11947096841020664
+        },
+        "6": {
+          "count": 84410,
+          "percentage": 11.504419954260356,
+          "activation_rate": 0.11504419954260356
+        },
+        "7": {
+          "count": 87599,
+          "percentage": 11.939055604469292,
+          "activation_rate": 0.11939055604469292
+        }
+      },
+      "classification": {
+        "hot": [
+          0,
+          2,
+          3,
+          4
+        ],
+        "cold": [
+          1,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    "29": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 82792,
+          "percentage": 11.283899263749833,
+          "activation_rate": 0.11283899263749833
+        },
+        "1": {
+          "count": 97621,
+          "percentage": 13.304975481043124,
+          "activation_rate": 0.13304975481043124
+        },
+        "2": {
+          "count": 98924,
+          "percentage": 13.482564145898015,
+          "activation_rate": 0.13482564145898016
+        },
+        "3": {
+          "count": 93002,
+          "percentage": 12.67544206357211,
+          "activation_rate": 0.1267544206357211
+        },
+        "4": {
+          "count": 92364,
+          "percentage": 12.588487675101334,
+          "activation_rate": 0.12588487675101334
+        },
+        "5": {
+          "count": 81060,
+          "percentage": 11.047841268716319,
+          "activation_rate": 0.11047841268716319
+        },
+        "6": {
+          "count": 92533,
+          "percentage": 12.611521047595941,
+          "activation_rate": 0.12611521047595942
+        },
+        "7": {
+          "count": 95422,
+          "percentage": 13.005269054323323,
+          "activation_rate": 0.13005269054323323
+        }
+      },
+      "classification": {
+        "hot": [
+          1,
+          2,
+          3,
+          4,
+          6,
+          7
+        ],
+        "cold": [
+          0,
+          5
+        ]
+      }
+    },
+    "30": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 87076,
+          "percentage": 11.867774812666447,
+          "activation_rate": 0.11867774812666447
+        },
+        "1": {
+          "count": 86987,
+          "percentage": 11.855644811766918,
+          "activation_rate": 0.11855644811766919
+        },
+        "2": {
+          "count": 100780,
+          "percentage": 13.735522366903904,
+          "activation_rate": 0.13735522366903904
+        },
+        "3": {
+          "count": 89191,
+          "percentage": 12.156032699211414,
+          "activation_rate": 0.12156032699211414
+        },
+        "4": {
+          "count": 101164,
+          "percentage": 13.787858550560298,
+          "activation_rate": 0.13787858550560297
+        },
+        "5": {
+          "count": 77490,
+          "percentage": 10.561278311285808,
+          "activation_rate": 0.10561278311285807
+        },
+        "6": {
+          "count": 83751,
+          "percentage": 11.414603430745872,
+          "activation_rate": 0.11414603430745872
+        },
+        "7": {
+          "count": 107279,
+          "percentage": 14.62128501685934,
+          "activation_rate": 0.1462128501685934
+        }
+      },
+      "classification": {
+        "hot": [
+          2,
+          4,
+          7
+        ],
+        "cold": [
+          0,
+          1,
+          3,
+          5,
+          6
+        ]
+      }
+    },
+    "31": {
+      "total_tokens": 366859,
+      "expert_stats": {
+        "0": {
+          "count": 88228,
+          "percentage": 12.02478336363562,
+          "activation_rate": 0.1202478336363562
+        },
+        "1": {
+          "count": 89067,
+          "percentage": 12.139132473239037,
+          "activation_rate": 0.12139132473239038
+        },
+        "2": {
+          "count": 108313,
+          "percentage": 14.762211094725766,
+          "activation_rate": 0.14762211094725766
+        },
+        "3": {
+          "count": 87773,
+          "percentage": 11.962770437688594,
+          "activation_rate": 0.11962770437688594
+        },
+        "4": {
+          "count": 73353,
+          "percentage": 9.997437707675155,
+          "activation_rate": 0.09997437707675155
+        },
+        "5": {
+          "count": 96379,
+          "percentage": 13.135700637029485,
+          "activation_rate": 0.13135700637029485
+        },
+        "6": {
+          "count": 81361,
+          "percentage": 11.088865204342813,
+          "activation_rate": 0.11088865204342813
+        },
+        "7": {
+          "count": 109244,
+          "percentage": 14.889099081663526,
+          "activation_rate": 0.14889099081663526
+        }
+      },
+      "classification": {
+        "hot": [
+          2,
+          5,
+          7
+        ],
+        "cold": [
+          0,
+          1,
+          3,
+          4,
+          6
+        ]
+      }
+    }
+  }
+}
